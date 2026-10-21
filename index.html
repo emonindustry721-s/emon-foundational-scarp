@@ -2076,5 +2076,21 @@ function downloadCV() {
   showToast('📄 CV download ready (link to your hosted PDF).');
 }
 </script>
+<script>
+  // Automatically replace "IBM" with "29A" everywhere
+  document.addEventListener("DOMContentLoaded", function() {
+    // 1. Change the Browser Tab Title
+    document.title = document.title.replace(/IBM/gi, "29A");
+    
+    // 2. Change all visible text on the page
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    let node;
+    while (node = walker.nextNode()) {
+      if (node.nodeValue.includes("IBM")) {
+        node.nodeValue = node.nodeValue.replace(/IBM/g, "29A");
+      }
+    }
+  });
+</script>
 </body>
 </html>
