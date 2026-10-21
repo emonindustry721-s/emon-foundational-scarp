@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="EMON FOUNDATIONAL SCARP — Portfolio, Learning Lab, 120-Hour Security Automation Blueprint of Md. Nazmul Hossain (Emon), CSE @ Daffodil International University.">
+<meta name="author" content="Md. Nazmul Hossain (Emon)">
+<title>EMON FOUNDATIONAL SCARP | IBM Security Portal</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+/* =========================================================
+   IBM CARBON DESIGN TOKENS
+   ========================================================= */
+:root{
+  --bg:#161616;
+  --bg-2:#1c1c1c;
+  --layer-1:#262626;
+  --layer-2:#393939;
+  --layer-3:#525252;
+  --border:#393939;
+  --border-strong:#525252;
+  --text:#f4f4f4;
+  --text-muted:#c6c6c6;
+  --text-subtle:#8d8d8d;
+  --blue:#0f62fe;
+  --blue-hover:#0353e9;
+  --blue-60:#4589ff;
+  --blue-40:#78a9ff;
+  --green:#42be65;
+  --red:#fa4d56;
+  --yellow:#f1c21b;
+  --magenta:#ee5396;
+  --teal:#08bdba;
+  --purple:#be95ff;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  --shadow:0 4px 12px rgba(0,0,0,.5);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.6);
+  --header-h:48px;
+  --side-w:260px;
+  --radius:0;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:14px;
+  line-height:1.55;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:var(--blue-60);text-decoration:none;transition:color .15s}
+a:hover{text-decoration:underline;color:var(--blue-40)}
+button{cursor:pointer;font-family:inherit}
+img{max-width:100%;display:block}
+h1,h2,h3,h4,h5{font-weight:400;letter-spacing:-.01em;line-height:1.2}
+p{margin:0}
+ul,ol{margin:0;padding-left:1.15rem}
+li{margin:.3rem 0}
+input,textarea,select{font-family:inherit}
+pre{font-family:var(--mono);font-size:12px;background:#0d0d0d;border:1px solid var(--border);padding:14px;overflow-x:auto;color:#a8d8a8;line-height:1.6}
+code{font-family:var(--mono);background:#1e1e1e;padding:2px 6px;color:var(--blue-60);font-size:12px}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--layer-2);border-radius:0}
+::-webkit-scrollbar-thumb:hover{background:var(--blue)}
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:var(--header-h);
+  background:var(--bg);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 14px;z-index:200;gap:12px;
+}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;color:var(--text-muted);min-width:0}
+.brand .ibm{background:var(--blue);color:#fff;font-weight:700;font-size:11px;padding:3px 7px;letter-spacing:.15em;border-radius:2px;flex-shrink:0}
+.brand .sep{color:var(--text-subtle);font-weight:300}
+.brand .name{color:#fff;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.08em}
+.topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.search-box{position:relative;width:250px;display:none}
+@media(min-width:960px){.search-box{display:block}}
+.search-box input{width:100%;background:var(--layer-1);border:1px solid var(--border);border-bottom:1px solid var(--border-strong);color:var(--text);font-family:var(--mono);font-size:12px;padding:7px 10px 7px 32px;outline:none}
+.search-box input:focus{border-bottom-color:var(--blue)}
+.search-box i{position:absolute;left:9px;top:9px;color:var(--text-subtle);font-size:12px}
+.status-pill{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;color:var(--text-subtle);letter-spacing:.06em;border-left:1px solid var(--border);padding-left:12px;white-space:nowrap}
+.status-dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 8px var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.sidebar{
+  position:fixed;top:var(--header-h);left:0;bottom:0;
+  width:var(--side-w);background:var(--bg);border-right:1px solid var(--border);
+  z-index:150;display:flex;flex-direction:column;
+  transition:transform .22s cubic-bezier(.2,0,.38,.9);
+  overflow:hidden;
+}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:10px 0 12px}
+.nav-label{font-family:var(--mono);font-size:10px;color:var(--text-subtle);letter-spacing:.15em;text-transform:uppercase;padding:10px 16px 6px}
+.nav-link{display:flex;align-items:center;gap:11px;padding:9px 16px;font-family:var(--mono);font-size:12px;color:var(--text-muted);border-left:3px solid transparent;text-decoration:none;transition:.12s}
+.nav-link .num{color:var(--text-subtle);font-size:10px;width:16px;flex-shrink:0}
+.nav-link i{width:16px;color:var(--text-subtle);font-size:13px;flex-shrink:0}
+.nav-link:hover{background:var(--layer-1);color:#fff;text-decoration:none}
+.nav-link:hover i,.nav-link.active i{color:var(--blue-60)}
+.nav-link.active{background:var(--layer-1);color:#fff;border-left-color:var(--blue)}
+.nav-link.active .num{color:var(--blue-60)}
+.nav-link.earn i{color:var(--yellow)}
+.nav-link.earn span.txt{color:var(--yellow);font-weight:600}
+.nav-link.earn.active{border-left-color:var(--yellow)}
+.sidebar-foot{padding:12px;border-top:1px solid var(--border);background:var(--bg-2);flex-shrink:0}
+.sidebar-foot .who{display:flex;align-items:center;gap:10px}
+.avatar-chip{width:34px;height:34px;border-radius:50%;background:rgba(15,98,254,.16);border:1px solid var(--blue);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:600;color:var(--blue-60);font-size:11px;flex-shrink:0}
+.sidebar-foot .who .n{font-size:11.5px;color:#fff;font-weight:600;line-height:1.2}
+.sidebar-foot .who .r{font-size:10px;color:var(--text-subtle);font-family:var(--mono);margin-top:2px}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:140;display:none}
+.overlay.show{display:block}
+.menu-btn{background:none;border:none;color:var(--text-muted);font-size:18px;padding:6px;display:none}
+@media(max-width:900px){.menu-btn{display:block}}
+@media(max-width:900px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}}
+
+main{margin-left:var(--side-w);margin-top:var(--header-h);padding:26px 26px 60px;min-height:calc(100vh - var(--header-h));background-image:linear-gradient(to right,rgba(57,57,57,.14) 1px,transparent 1px),linear-gradient(to bottom,rgba(57,57,57,.14) 1px,transparent 1px);background-size:32px 32px}
+@media(max-width:900px){main{margin-left:0;padding:20px 14px 50px}}
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+.page-head{border-bottom:1px solid var(--border);padding-bottom:16px;margin-bottom:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between}
+.crumbs{font-family:var(--mono);font-size:11px;color:var(--text-subtle);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.crumbs b{color:var(--blue-60);font-weight:500}
+.page-head h1{font-size:26px;color:#fff;font-weight:300;letter-spacing:-.02em}
+.page-head .meta{font-family:var(--mono);font-size:11px;color:var(--text-subtle);text-align:right;line-height:1.8}
+.page-head .meta b{color:var(--text-muted)}
+
+/* =========================================================
+   VIEW / ANIMATION
+   ========================================================= */
+.view{display:none;animation:fade .28s ease}
+.view.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* =========================================================
+   COMPONENTS
+   ========================================================= */
+.card{background:var(--layer-1);border:1px solid var(--border);padding:20px;transition:border-color .18s}
+.card:hover{border-color:var(--border-strong)}
+.card-title{font-size:15px;font-weight:400;color:#fff;display:flex;align-items:center;gap:9px;padding-bottom:12px;margin-bottom:16px;border-bottom:1px solid var(--border)}
+.card-title i{color:var(--blue-60)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:1200px){.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.mono{font-family:var(--mono)}
+.small{font-size:12px}
+.tiny{font-size:11px}
+.subtle{color:var(--text-subtle)}
+.muted{color:var(--text-muted)}
+.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mt24{margin-top:24px}
+.mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.center{text-align:center}
+.hr{height:1px;background:var(--border);border:0;margin:16px 0}
+
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;border:none;padding:9px 16px;font-family:var(--mono);font-size:12.5px;letter-spacing:.02em;transition:.15s;text-decoration:none;line-height:1.2}
+.btn:hover{background:var(--blue-hover);color:#fff;text-decoration:none}
+.btn:active{background:#002d9c}
+.btn-sec{background:transparent;color:var(--blue-60);border:1px solid var(--blue-60)}
+.btn-sec:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn-ghost{background:var(--layer-2);color:#fff;border:none}
+.btn-ghost:hover{background:#4c4c4c;color:#fff}
+.btn-sm{padding:6px 12px;font-size:11.5px}
+.btn .icon{width:14px;height:14px}
+
+.tag{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;padding:3px 8px;border:1px solid var(--border-strong);color:var(--text-muted);text-transform:uppercase;white-space:nowrap}
+.tag-blue{border-color:rgba(15,98,254,.5);background:rgba(15,98,254,.12);color:var(--blue-60)}
+.tag-green{border-color:rgba(66,190,101,.45);background:rgba(66,190,101,.1);color:var(--green)}
+.tag-yellow{border-color:rgba(241,194,27,.45);background:rgba(241,194,27,.1);color:var(--yellow)}
+.tag-red{border-color:rgba(250,77,86,.45);background:rgba(250,77,86,.1);color:var(--red)}
+.tag-teal{border-color:rgba(8,189,186,.45);background:rgba(8,189,186,.1);color:var(--teal)}
+.tag-magenta{border-color:rgba(238,83,150,.45);background:rgba(238,83,150,.1);color:var(--magenta)}
+.tag-purple{border-color:rgba(190,149,255,.45);background:rgba(190,149,255,.1);color:var(--purple)}
+
+.note{background:rgba(241,194,27,.08);border-left:3px solid var(--yellow);padding:12px 14px;font-size:12.5px;color:var(--text-muted);margin-bottom:16px}
+.note.blue{background:rgba(15,98,254,.08);border-left-color:var(--blue)}
+.note.green{background:rgba(66,190,101,.08);border-left-color:var(--green)}
+.note.red{background:rgba(250,77,86,.08);border-left-color:var(--red)}
+
+/* =========================================================
+   HERO (WHOAMI)
+   ========================================================= */
+.hero{display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap;background:var(--layer-1);border:1px solid var(--border);padding:24px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 92% 8%,rgba(15,98,254,.16),transparent 45%);pointer-events:none}
+.avatar-wrap{width:150px;height:150px;flex-shrink:0;position:relative;border:2px solid var(--blue);background:#0d0d0d;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.avatar-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.avatar-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(45deg,rgba(15,98,254,.06) 0 8px,transparent 8px 16px),#0d0d0d;font-family:var(--mono);font-size:34px;font-weight:600;color:var(--blue-60);letter-spacing:.05em;z-index:0}
+.avatar-wrap img{z-index:1;position:relative}
+.avatar-badge{position:absolute;bottom:0;left:0;right:0;background:var(--blue);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-align:center;padding:3px 0;z-index:2}
+.hero-body{flex:1;min-width:260px;position:relative;z-index:1}
+.hero-name{font-size:28px;color:#fff;font-weight:400;line-height:1.15;margin-top:8px}
+.hero-role{font-family:var(--mono);font-size:12.5px;color:var(--blue-60);margin-top:6px;letter-spacing:.03em}
+.hero-bio{color:var(--text-muted);font-size:13.5px;margin-top:14px;max-width:75ch;line-height:1.65}
+.quote{margin-top:16px;padding:14px 16px;border-left:4px solid var(--blue);background:#1e1e1e;font-family:var(--mono);font-size:12px;color:var(--text-muted);font-style:italic}
+
+.stat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:16px}
+@media(max-width:900px){.stat-strip{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--layer-1);padding:14px 16px}
+.stat b{display:block;font-family:var(--mono);font-size:22px;color:#fff;font-weight:400}
+.stat span{font-size:10px;color:var(--text-subtle);font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase}
+
+.photo-tile{width:100%;aspect-ratio:1;background:var(--layer-1);border:1px solid var(--border);overflow:hidden;position:relative}
+.photo-tile img{width:100%;height:100%;object-fit:cover}
+.photo-tile .label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.85));padding:16px 10px 8px;font-family:var(--mono);font-size:10px;color:#fff;letter-spacing:.08em;text-transform:uppercase}
+
+/* =========================================================
+   SKILL TILES
+   ========================================================= */
+.filter-bar{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:11px;padding:6px 12px;background:transparent;border:1px solid var(--border-strong);color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;transition:.12s}
+.chip:hover{border-color:var(--text-subtle);color:#fff}
+.chip.active{background:var(--blue);border-color:var(--blue);color:#fff}
+
+.skill-tile{background:var(--layer-1);border:1px solid var(--border);padding:16px;cursor:pointer;transition:.18s;position:relative;display:flex;flex-direction:column;gap:10px;min-height:180px}
+.skill-tile:hover{border-color:var(--blue);background:#2a2a2a;transform:translateY(-2px);box-shadow:var(--shadow)}
+.skill-tile.highlight{border-color:var(--yellow);box-shadow:0 0 0 1px var(--yellow)}
+.skill-tile .top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.skill-tile h4{font-size:14.5px;color:#fff;font-weight:500}
+.skill-tile .cat{font-family:var(--mono);font-size:10px;color:var(--text-subtle);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+.skill-tile p{font-size:12px;color:var(--text-muted);flex:1}
+.skill-tile .bar-track{height:4px;background:var(--layer-2);width:100%;overflow:hidden;margin-top:4px}
+.skill-tile .bar-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--teal));transition:width .4s}
+.skill-tile .bar-meta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--text-subtle);margin-bottom:4px}
+.skill-tile .go{font-family:var(--mono);font-size:10px;color:var(--blue-60);letter-spacing:.08em;margin-top:6px}
+
+/* =========================================================
+   CERT / DOC / PROJECT CARDS
+   ========================================================= */
+.cert-card{background:var(--layer-1);border:1px solid var(--border);padding:18px;display:flex;flex-direction:column;gap:12px;cursor:pointer;transition:.15s;position:relative;overflow:hidden}
+.cert-card:hover{border-color:var(--blue);background:#2a2a2a}
+.cert-card::after{content:"";position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle at top right,rgba(15,98,254,.25),transparent 70%);pointer-events:none}
+.cert-badge{width:44px;height:44px;border:1px solid var(--blue);background:rgba(15,98,254,.1);display:flex;align-items:center;justify-content:center;color:var(--blue-60);font-size:18px}
+.cert-card h4{font-size:14px;color:#fff;font-weight:500}
+.cert-card .issuer{font-family:var(--mono);font-size:11px;color:var(--blue-60)}
+.cert-card .meta-line{font-family:var(--mono);font-size:10.5px;color:var(--text-subtle)}
+
+.doc-card{background:var(--layer-1);border:1px solid var(--border);padding:16px;display:flex;gap:14px;align-items:flex-start;cursor:pointer;transition:.15s}
+.doc-card:hover{border-color:var(--blue);background:#2a2a2a}
+.doc-icon{width:44px;height:54px;border:1px solid var(--border-strong);display:flex;align-items:center;justify-content:center;background:#1c1c1c;flex-shrink:0;font-family:var(--mono);font-size:10px;color:var(--text-muted);letter-spacing:.05em}
+.doc-card h4{font-size:13px;color:#fff;font-weight:500}
+.doc-card .meta{font-family:var(--mono);font-size:10.5px;color:var(--text-subtle);margin-top:3px}
+
+.proj-card{background:var(--layer-1);border:1px solid var(--border);padding:18px;display:flex;flex-direction:column;gap:10px;transition:.15s}
+.proj-card:hover{border-color:var(--border-strong)}
+.proj-card h4{font-size:15px;color:#fff;font-weight:500}
+.proj-num{font-family:var(--mono);font-size:10px;color:var(--blue-60);border:1px solid rgba(15,98,254,.45);padding:1px 6px;letter-spacing:.08em}
+.tech-list{display:flex;flex-wrap:wrap;gap:5px}
+
+.wip-card{background:var(--layer-1);border:1px solid var(--border);border-left:3px solid var(--yellow);padding:18px;display:flex;flex-direction:column;gap:12px}
+.wip-progress{height:6px;background:var(--layer-2);width:100%;overflow:hidden}
+.wip-progress .fill{height:100%;background:linear-gradient(90deg,var(--yellow),var(--red));transition:width .4s}
+
+/* =========================================================
+   EARN — WEEK / DAY CARDS
+   ========================================================= */
+.week-card{background:var(--layer-1);border:1px solid var(--border);overflow:hidden}
+.week-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:14px 18px;background:#2c2c2c;border-bottom:1px solid var(--border)}
+.week-head h4{font-size:15px;color:#fff}
+.week-head .week-meta{font-family:var(--mono);font-size:11px;color:var(--text-subtle)}
+.week-body{padding:16px 18px;display:flex;flex-direction:column;gap:14px}
+
+.day-row{border-left:2px solid var(--border-strong);padding-left:14px;display:flex;flex-direction:column;gap:6px}
+.day-row .day-label{font-family:var(--mono);font-size:11px;color:var(--blue-60);letter-spacing:.08em;text-transform:uppercase}
+.day-row .kv{font-size:12.5px;color:var(--text-muted)}
+.day-row .kv b{color:#fff;font-weight:500}
+.day-row .kv code{font-size:11px}
+
+.email-box{background:#0d0d0d;border:1px solid var(--border);padding:14px;font-family:var(--mono);font-size:11.5px;color:#c6c6c6;white-space:pre-wrap;line-height:1.7;max-height:280px;overflow:auto;position:relative;margin-top:8px}
+.email-box .copy-btn{position:absolute;top:8px;right:8px;background:var(--layer-2);border:none;color:#fff;padding:4px 8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;cursor:pointer}
+.email-box .copy-btn:hover{background:var(--blue)}
+
+table.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+table.tbl th,table.tbl td{border:1px solid var(--border);padding:9px 12px;text-align:left;vertical-align:top}
+table.tbl th{background:#2c2c2c;color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;font-weight:500}
+table.tbl td{color:var(--text-muted)}
+table.tbl tr:hover td{background:#232323}
+table.tbl td b{color:#fff;font-weight:500}
+
+.sprint-hour{background:var(--layer-1);border:1px solid var(--border);border-left:3px solid var(--teal);padding:14px 16px}
+.sprint-hour h5{font-family:var(--mono);font-size:12px;color:var(--teal);letter-spacing:.06em;margin-bottom:8px}
+.sprint-hour p{font-size:12.5px;color:var(--text-muted);line-height:1.65}
+.sprint-hour ul{padding-left:1rem;margin-top:6px;font-size:12.5px;color:var(--text-muted)}
+
+/* =========================================================
+   TASK MANAGER
+   ========================================================= */
+.task-panel{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.progress-track{height:8px;background:var(--layer-2);width:100%;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--teal));width:0;transition:width .4s}
+.progress-meta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--text-subtle);margin-bottom:6px}
+.task-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
+.task-item{display:flex;align-items:flex-start;gap:10px;background:#202020;border:1px solid var(--border);padding:10px 12px;transition:.12s}
+.task-item:hover{border-color:var(--border-strong)}
+.task-item.done{opacity:.55;border-color:rgba(66,190,101,.35)}
+.task-item.done .task-text{text-decoration:line-through;color:var(--text-subtle)}
+.task-num{font-family:var(--mono);font-size:10px;color:var(--blue-60);border:1px solid rgba(15,98,254,.4);padding:1px 5px;flex-shrink:0;margin-top:2px;min-width:28px;text-align:center}
+.task-item.done .task-num{color:var(--green);border-color:rgba(66,190,101,.4)}
+.task-text{font-size:13px;color:var(--text-muted);flex:1;line-height:1.45;cursor:pointer}
+.task-check{appearance:none;-webkit-appearance:none;width:16px;height:16px;border:1px solid var(--border-strong);background:transparent;flex-shrink:0;margin-top:2px;cursor:pointer;position:relative;transition:.12s}
+.task-check:checked{background:var(--blue);border-color:var(--blue)}
+.task-check:checked::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;line-height:1}
+
+/* =========================================================
+   RESOURCES
+   ========================================================= */
+.res-link{display:flex;align-items:center;gap:12px;background:var(--layer-1);border:1px solid var(--border);padding:12px 14px;transition:.12s;text-decoration:none;color:var(--text-muted)}
+.res-link:hover{background:#2a2a2a;border-color:var(--blue);text-decoration:none;color:#fff}
+.res-link .rname{font-size:13px;color:#fff;font-weight:500}
+.res-link .rdesc{font-size:11px;color:var(--text-subtle);font-family:var(--mono);margin-top:1px}
+.res-link i{color:var(--blue-60);font-size:18px;flex-shrink:0}
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+.social-btn{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--layer-1);border:1px solid var(--border);color:var(--text-muted);transition:.14s;text-decoration:none}
+.social-btn:hover{background:#2a2a2a;border-color:var(--blue);color:#fff;text-decoration:none}
+.social-btn i{font-size:20px;color:var(--blue-60);width:22px;text-align:center}
+.social-btn .lbl{font-size:13px;color:#fff}
+.social-btn .sub{font-family:var(--mono);font-size:10.5px;color:var(--text-subtle);margin-top:1px}
+
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.field label{font-family:var(--mono);font-size:11px;color:var(--text-muted);letter-spacing:.06em}
+.field input,.field textarea{background:var(--layer-1);border:1px solid var(--border);border-bottom:1px solid var(--border-strong);color:var(--text);padding:10px 12px;font-size:13px;outline:none;width:100%;transition:border-color .15s}
+.field input:focus,.field textarea:focus{border-bottom-color:var(--blue)}
+.field textarea{resize:vertical;min-height:110px}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:500;display:none;align-items:flex-start;justify-content:center;padding:56px 14px 40px;overflow-y:auto;backdrop-filter:blur(3px)}
+.modal-backdrop.show{display:flex}
+.modal{background:var(--layer-1);border:1px solid var(--border-strong);width:100%;max-width:840px;box-shadow:var(--shadow-lg);animation:pop .18s ease;margin-bottom:40px}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.99)}to{opacity:1;transform:none}}
+.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:16px 20px;border-bottom:1px solid var(--border);background:#2c2c2c;position:sticky;top:0;z-index:2}
+.modal-head .kicker{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--blue-60);text-transform:uppercase}
+.modal-head h3{font-size:18px;color:#fff;font-weight:400;margin-top:4px}
+.modal-head .close{background:none;border:none;color:var(--text-muted);font-size:18px;padding:4px 8px}
+.modal-head .close:hover{color:#fff}
+.modal-body{padding:20px}
+.modal-foot{padding:12px 20px;border-top:1px solid var(--border);background:#232323;display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.modal-section{margin-bottom:18px}
+.modal-section h5{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--text-subtle);text-transform:uppercase;margin-bottom:10px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.step-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px dashed #333}
+.step-item:last-child{border-bottom:none}
+.step-bullet{width:22px;height:22px;flex-shrink:0;border:1px solid var(--blue);color:var(--blue-60);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;background:rgba(15,98,254,.08)}
+.step-item .st-title{font-size:13px;color:#fff;font-weight:500}
+.step-item .st-desc{font-size:12.5px;color:var(--text-muted);margin-top:3px;line-height:1.55}
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+.toast{position:fixed;bottom:22px;right:22px;z-index:900;background:#2c2c2c;border-left:4px solid var(--green);color:#fff;padding:12px 18px;font-size:13px;box-shadow:var(--shadow);transform:translateY(140%);transition:transform .25s ease;max-width:340px}
+.toast.show{transform:translateY(0)}
+.toast.err{border-left-color:var(--red)}
+
+/* =========================================================
+   UTILITIES
+   ========================================================= */
+.hidden{display:none !important}
+.no-select{user-select:none}
+.gradient-blue{background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff}
+.gradient-warn{background:linear-gradient(135deg,var(--yellow),var(--red));color:#000}
+.text-blue{color:var(--blue-60)}
+.text-green{color:var(--green)}
+.text-yellow{color:var(--yellow)}
+.text-red{color:var(--red)}
+.text-teal{color:var(--teal)}
+
+@media print{
+  .topbar,.sidebar,.overlay,.menu-btn,.no-print{display:none !important}
+  main{margin:0;padding:0;background:#fff;color:#000}
+  body{background:#fff;color:#000}
+  .card{background:#fff;border:1px solid #ccc;color:#000}
+}
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     TOP BAR
+     ========================================================= -->
+<header class="topbar">
+  <div class="brand">
+    <button class="menu-btn" id="menuBtn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    <span class="ibm">IBM</span>
+    <span class="sep">//</span>
+    <span class="name">EMON FOUNDATIONAL SCARP</span>
+  </div>
+  <div class="topbar-right">
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="globalSearch" placeholder="Search skills, projects, docs..." autocomplete="off">
+    </div>
+    <div class="status-pill"><span class="status-dot"></span> ONLINE</div>
+    <button class="btn btn-sm no-print" onclick="downloadCV()"><i class="fa-solid fa-download"></i><span style="display:none" class="d-md-inline">CV.pdf</span></button>
+  </div>
+</header>
+
+<!-- =========================================================
+     SIDEBAR
+     ========================================================= -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-scroll">
+    <div class="nav-label">Navigation</div>
+    <nav id="navLinks">
+      <a class="nav-link" href="#whoami" data-route="whoami"><span class="num">01</span><i class="fa-solid fa-user"></i><span>whoami</span></a>
+      <a class="nav-link" href="#learning" data-route="learning"><span class="num">02</span><i class="fa-solid fa-graduation-cap"></i><span>learning</span></a>
+      <a class="nav-link" href="#validation" data-route="validation"><span class="num">03</span><i class="fa-solid fa-certificate"></i><span>validation</span></a>
+      <a class="nav-link" href="#document" data-route="document"><span class="num">04</span><i class="fa-solid fa-file-contract"></i><span>document</span></a>
+      <a class="nav-link" href="#archive" data-route="archive"><span class="num">05</span><i class="fa-solid fa-box-archive"></i><span>archive</span></a>
+      <a class="nav-link" href="#project" data-route="project"><span class="num">06</span><i class="fa-solid fa-code-branch"></i><span>project</span></a>
+      <a class="nav-link" href="#underdevelopment" data-route="underdevelopment"><span class="num">07</span><i class="fa-solid fa-flask"></i><span>underdevelopment</span></a>
+      <a class="nav-link" href="#production" data-route="production"><span class="num">08</span><i class="fa-solid fa-server"></i><span>production</span></a>
+      <a class="nav-link earn" href="#lets_earn" data-route="lets_earn"><span class="num">09</span><i class="fa-solid fa-bolt"></i><span class="txt">lets_earn</span></a>
+      <a class="nav-link" href="#resources" data-route="resources"><span class="num">10</span><i class="fa-solid fa-book-bookmark"></i><span>resources</span></a>
+      <a class="nav-link" href="#get_in_touch" data-route="get_in_touch"><span class="num">11</span><i class="fa-solid fa-envelope"></i><span>get_in_touch</span></a>
+    </nav>
+    <div class="nav-label" style="margin-top:8px">Quick Access</div>
+    <a class="nav-link" href="#learning" onclick="setTimeout(()=>document.getElementById('taskPanel').scrollIntoView({behavior:'smooth'}),300)"><span class="num">31</span><i class="fa-solid fa-list-check"></i><span>Task Tracker</span></a>
+    <a class="nav-link" href="#lets_earn"><span class="num">$</span><i class="fa-solid fa-bolt"></i><span>Earn Blueprint</span></a>
+    <a class="nav-link" href="#resources"><span class="num">📚</span><i class="fa-solid fa-book"></i><span>Library</span></a>
+  </div>
+  <div class="sidebar-foot">
+    <div class="who">
+      <div class="avatar-chip">MNH</div>
+      <div>
+        <div class="n">Md. Nazmul Hossain</div>
+        <div class="r">Emon // Sec-Eng</div>
+      </div>
+    </div>
+  </div>
+</aside>
+<div class="overlay" id="overlay"></div>
+
+<!-- =========================================================
+     MAIN
+     ========================================================= -->
+<main>
+
+  <!-- PAGE HEADER (dynamic) -->
+  <div class="page-head">
+    <div>
+      <div class="crumbs">IBM Security Portal / <b id="breadcrumbPath">whoami</b></div>
+      <h1 id="pageTitle">01. Identity &amp; Technical Matrix</h1>
+    </div>
+    <div class="meta">
+      <div>LOCATION: <b>Dhaka, Bangladesh</b></div>
+      <div>STATUS: <b class="text-green">Available for SOC &amp; SecOps</b></div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       VIEW 01 — WHOAMI
+       ========================================================= -->
+  <section class="view active" id="view-whoami">
+    <div class="hero">
+      <div class="avatar-wrap">
+        <div class="avatar-fallback">MNH</div>
+        <img src="assets/profile.jpg" alt="Md. Nazmul Hossain" onerror="this.style.display='none'">
+        <div class="avatar-badge">SEC-ENG</div>
+      </div>
+      <div class="hero-body">
+        <span class="tag tag-blue"><i class="fa-solid fa-graduation-cap"></i> CSE Undergraduate @ DIU</span>
+        <h2 class="hero-name">Md. Nazmul Hossain (Emon)</h2>
+        <p class="hero-role">Aspiring Security Automation Engineer · Penetration Tester · SOC Developer</p>
+        <p class="hero-bio">
+          Motivated Computer Science &amp; Engineering student at <b>Daffodil International University (DIU)</b>, Dhaka, Bangladesh.
+          Focused on <b>cybersecurity automation</b>, <b>SOC log telemetry</b>, web vulnerability analysis and custom scripting in
+          <b>Python</b>, <b>Perl-6 / Raku</b>, and <b>Bash</b>. Active community contributor at
+          <b>Cybersecurity Protection Community (29A)</b> and <b>Inhealer International Family (IIF)</b>.
+        </p>
+        <div class="quote">"Everybody has a complete view of completeness."</div>
+        <div class="row mt16">
+          <a class="btn" href="mailto:mnhemon357@gmail.com"><i class="fa-solid fa-envelope"></i> mnhemon357@gmail.com</a>
+          <a class="btn btn-sec" href="https://mnhemon357.wordpress.com/" target="_blank" rel="noopener"><i class="fa-brands fa-wordpress"></i> WordPress Portfolio</a>
+          <a class="btn btn-sec" href="https://facebook.com/profile.php?id=100077713088455" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i> Facebook</a>
+          <button class="btn btn-ghost" onclick="downloadCV()"><i class="fa-solid fa-download"></i> Download CV</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-strip">
+      <div class="stat"><b>16+</b><span>Core Skills</span></div>
+      <div class="stat"><b>06</b><span>Shipped Projects</span></div>
+      <div class="stat"><b>07</b><span>Certifications</span></div>
+      <div class="stat"><b>31</b><span>Day Sprint</span></div>
+    </div>
+
+    <div class="grid g2 mt16">
+      <div class="card">
+        <h3 class="card-title"><i class="fa-solid fa-graduation-cap"></i> Academic Track</h3>
+        <div class="mb16" style="border-left:2px solid var(--blue);padding-left:14px">
+          <h4 style="font-size:14px;color:#fff;font-weight:500">B.Sc. in Computer Science &amp; Engineering</h4>
+          <p class="mono small" style="color:var(--blue-60)">Daffodil International University (DIU)</p>
+          <p class="mono tiny subtle">2021 – Present · Dhaka, Bangladesh</p>
+          <p class="small muted" style="margin-top:8px">
+            Relevant Coursework: Data Structures, Operating Systems, Networks, Databases, Software Engineering,
+            Web Security, Cryptography, Scripting Languages.
+          </p>
+        </div>
+        <div style="border-left:2px solid var(--border);padding-left:14px">
+          <h4 style="font-size:14px;color:#fff;font-weight:500">Higher Secondary Certificate (HSC)</h4>
+          <p class="mono small subtle">Armed Police Battalion Public School and College, Bogura</p>
+          <p class="mono tiny subtle">2018 – 2020 · Science Group</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title"><i class="fa-solid fa-microscope"></i> Research &amp; Focus</h3>
+        <ul class="small muted" style="line-height:1.9">
+          <li><b style="color:#fff">Security Automation</b> — scripted detection, response, and reporting pipelines</li>
+          <li><b style="color:#fff">SOC Telemetry</b> — log parsing, correlation, alert triage</li>
+          <li><b style="color:#fff">Web Application Security</b> — OWASP Top 10, header hardening, auth flaws</li>
+          <li><b style="color:#fff">DevSecOps</b> — CI/CD security gates via GitHub Actions &amp; Docker</li>
+          <li><b style="color:#fff">Perl-6 / Raku</b> — high-performance log analysis &amp; regex extraction</li>
+          <li><b style="color:#fff">AI / ML Fundamentals</b> — applying ML to anomaly detection</li>
+          <li><b style="color:#fff">Programming Language Concepts</b> &amp; Binary Systems</li>
+        </ul>
+        <div class="note blue mt16"><b>Current mission:</b> ship the 31-day task sprint into a paid security automation toolkit.</div>
+      </div>
+    </div>
+
+    <div class="grid g3 mt16">
+      <div class="card">
+        <h3 class="card-title"><i class="fa-solid fa-layer-group"></i> Technical Stack</h3>
+        <div class="row">
+          <span class="tag tag-blue">Python</span>
+          <span class="tag tag-purple">Perl-6 / Raku</span>
+          <span class="tag">C</span>
+          <span class="tag">Java</span>
+          <span class="tag">Bash</span>
+          <span class="tag">SQL</span>
+          <span class="tag tag-red">Nmap</span>
+          <span class="tag tag-red">Wireshark</span>
+          <span class="tag tag-red">Burp Suite</span>
+          <span class="tag tag-red">Metasploit</span>
+          <span class="tag tag-magenta">OWASP Top 10</span>
+          <span class="tag tag-magenta">OWASP ZAP</span>
+          <span class="tag tag-teal">Docker</span>
+          <span class="tag tag-yellow">AWS</span>
+          <span class="tag tag-green">Git / GitHub</span>
+          <span class="tag">Linux (Kali)</span>
+          <span class="tag">Ubuntu / Mint</span>
+          <span class="tag">Windows 10 / 11</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title"><i class="fa-solid fa-people-group"></i> Soft Skills</h3>
+        <ul class="small muted" style="line-height:1.9">
+          <li>Technical Writing</li>
+          <li>Problem-Solving</li>
+          <li>Team Leadership</li>
+          <li>Collaborative Project Participation</li>
+          <li>Independent Learning</li>
+          <li>Creative Digital Work</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title"><i class="fa-solid fa-heart"></i> Personal Interests</h3>
+        <ul class="small muted" style="line-height:1.9">
+          <li>Travelling &amp; driving</li>
+          <li>Social activities with friends</li>
+          <li>Creative digital art</li>
+          <li>Cultural exploration</li>
+          <li>AI / ML exploration</li>
+          <li>Binary systems &amp; language concepts</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid g2 mt16">
+      <div class="photo-tile">
+        <img src="assets/profile-alt.jpg" alt="Nazmul portrait" onerror="this.style.display='none';this.parentNode.style.background='repeating-linear-gradient(45deg,rgba(15,98,254,.08) 0 8px,transparent 8px 16px),#1c1c1c'">
+        <div class="label">PORTRAIT / STUDIO</div>
+      </div>
+      <div class="card">
+        <h3 class="card-title"><i class="fa-solid fa-quote-left"></i> Mission Statement</h3>
+        <p class="small muted" style="line-height:1.75">
+          I don't just find bugs; I write the scripts that prevent them. My work converts manual security
+          audits into reproducible automation — reducing audit time by up to <b class="text-blue">40%</b> and
+          letting small teams ship safely. Every script I write becomes a case study, every case study becomes
+          a portfolio piece, and every portfolio piece becomes a client.
+        </p>
+        <div class="note green mt16"><b>Current availability:</b> open for SOC L1, security automation, and Perl-6 log analysis engagements.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VIEW 02 — LEARNING
+       ========================================================= -->
+  <section class="view" id="view-learning">
+    <div class="card mb16">
+      <div class="task-panel">
+        <div>
+          <h3 style="font-size:16px;color:#fff">Skill Development Matrix</h3>
+          <p class="small subtle">Click any card to open its full learning guideline, roadmap, and practice labs.</p>
+        </div>
+        <div class="filter-bar" id="skillFilters">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="languages">Languages</button>
+          <button class="chip" data-filter="security">Security</button>
+          <button class="chip" data-filter="os">OS &amp; Infra</button>
+          <button class="chip" data-filter="cloud">Cloud / DevOps</button>
+          <button class="chip" data-filter="projects">Dashboards</button>
+        </div>
+      </div>
+      <div class="grid g4" id="skillsGrid"></div>
+    </div>
+
+    <div class="card" id="taskPanel">
+      <div class="task-panel">
+        <div>
+          <h3 style="font-size:16px;color:#fff"><i class="fa-solid fa-list-check text-blue"></i> ৩১ দিনের বাংলা টাস্ক ট্র্যাকার</h3>
+          <p class="small subtle">প্রতিদিনের কাজ টিক দিন — আপনার অগ্রগতি ব্রাউজারে স্বয়ংক্রিয়ভাবে সেভ হবে।</p>
+        </div>
+        <div class="filter-bar">
+          <button class="chip active" data-taskfilter="all">সব</button>
+          <button class="chip" data-taskfilter="pending">বাকি</button>
+          <button class="chip" data-taskfilter="done">সম্পন্ন</button>
+          <button class="btn btn-ghost btn-sm" onclick="resetCalendar()"><i class="fa-solid fa-trash"></i> রিসেট</button>
+        </div>
+      </div>
+      <div class="mb16">
+        <div class="progress-meta"><span>অগ্রগতি <b class="text-white" id="calDoneCount">0</b> / 31</span><span id="calPercent">0%</span></div>
+        <div class="progress-track"><div class="progress-fill" id="calProgressFill"></div></div>
+      </div>
+      <div class="task-list" id="taskList"></div>
+      <div class="note mt16"><b>নোট:</b> প্রতিটি টাস্ক সম্পন্ন করার পর সংশ্লিষ্ট সেকশনে (project / document / lets_earn) আপডেট করুন — এটাই আপনার পোর্টফোলিওর প্রমাণ।</div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VIEW 03 — VALIDATION
+       ========================================================= -->
+  <section class="view" id="view-validation">
+    <div class="note blue mb16"><b>Credential Validation:</b> প্রতিটি ব্যাজে ক্লিক করে ক্রেডেনশিয়াল আইডি, ইস্যুয়ার এবং ভেরিফিকেশন লিংক দেখুন।</div>
+    <div class="grid g3" id="certGrid"></div>
+
+    <div class="card mt16">
+      <h3 class="card-title"><i class="fa-solid fa-shield-halved"></i> Verified Skill Evidence</h3>
+      <table class="tbl">
+        <thead><tr><th>Credential</th><th>Issuer</th><th>Domain</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><b>Cisco Junior Cybersecurity Analyst</b></td><td>Cisco Networking Academy</td><td>Blue Team / SOC</td><td class="text-green">Verified</td></tr>
+          <tr><td><b>Qualys VMDR</b></td><td>Qualys</td><td>Vulnerability Management</td><td class="text-green">Verified</td></tr>
+          <tr><td><b>IBM Professional Certificate</b></td><td>IBM / Coursera</td><td>Cybersecurity &amp; Automation</td><td class="text-green">Verified</td></tr>
+          <tr><td><b>PortSwigger Apprentice Labs</b></td><td>PortSwigger Academy</td><td>SQLi / XSS / Access Control</td><td class="text-green">Completed</td></tr>
+          <tr><td><b>AWS Cloud Practitioner Training</b></td><td>AWS Skill Builder</td><td>Cloud Foundations</td><td class="text-yellow">Completed Digital Training</td></tr>
+          <tr><td><b>OverTheWire Bandit Level 20+</b></td><td>OverTheWire</td><td>Linux CLI / Permissions</td><td class="text-green">Completed</td></tr>
+          <tr><td><b>Python for Security</b></td><td>Self-directed</td><td>socket / requests / os / subprocess</td><td class="text-green">Proficient</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VIEW 04 — DOCUMENT
+       ========================================================= -->
+  <section class="view" id="view-document">
+    <div class="card mb16">
+      <div class="task-panel">
+        <div>
+          <h3 style="font-size:16px;color:#fff"><i class="fa-solid fa-upload text-blue"></i> Personal Document Vault</h3>
+          <p class="small subtle">নিজের ডকুমেন্ট আপলোড করুন — ফাইল ব্রাউজারেই সংরক্ষিত থাকবে (max ~2MB per file)।</p>
+        </div>
+        <button class="btn" onclick="document.getElementById('docUpload').click()"><i class="fa-solid fa-upload"></i> Upload</button>
+        <input type="file" id="docUpload" multiple class="hidden" accept="image/*,application/pdf,.doc,.docx,.txt">
+      </div>
+      <div style="border:1px dashed var(--border-strong);padding:26px;text-align:center;color:var(--text-subtle);font-family:var(--mono);font-size:12px;cursor:pointer;background:#1c1c1c;transition:.15s" onclick="document.getElementById('docUpload').click()" onmouseover="this.style.borderColor='var(--blue)'" onmouseout="this.style.borderColor='var(--border-strong)'">
+        <i class="fa-solid fa-cloud-arrow-up" style="font-size:24px;color:var(--blue-60)"></i>
+        <div style="margin-top:8px">Drag &amp; drop বা ক্লিক করুন — CV, HSC Certificate, Student ID, Transcript</div>
+      </div>
+    </div>
+    <h3 style="font-size:14px;color:#fff;margin-bottom:12px">Standard Vault</h3>
+    <div class="grid g3" id="docGrid"></div>
+    <h3 style="font-size:14px;color:#fff;margin:22px 0 12px">Uploaded Files</h3>
+    <div class="grid g3" id="uploadGrid"></div>
+  </section>
+
+  <!-- =========================================================
+       VIEW 05 — ARCHIVE
+       ========================================================= -->
+  <section class="view" id="view-archive">
+    <div class="grid g2">
+      <div class="card">
+        <h3 class="card-title"><i class="fa-solid fa-handshake"></i> Inhealer International Family (IIF)</h3>
+        <p class="small muted">Collaborated on project activities and gained exposure to international teamwork. Contributed to cross-cultural technical documentation and event coordination for global cyber awareness programs.</p>
+        <div class="row mt12">
+          <span class="tag tag-teal">International Collaboration</span>
+          <span class="tag tag-teal">Documentation</span>
+          <span class="tag tag-teal">Awareness</span>
+        </div>
+        <p class="mono tiny subtle mt12">2022 – Present · Volunteer</p>
+      </div>
+      <div class="card">
+        <h3 class="card-title"><i class="fa-solid fa-shield-halved"></i> Cybersecurity Protection Community (29A)</h3>
+        <p class="small muted">Active member and contributor — participating in CTF-style challenges, vulnerability discussions, and peer mentoring on Linux hardening and Python automation. Working on developing a community platform for practical security skills.</p>
+        <div class="row mt12">
+          <span class="tag tag-magenta">CTF Practice</span>
+          <span class="tag tag-magenta">Peer Mentoring</span>
+          <span class="tag tag-magenta">Linux Hardening</span>
+        </div>
+        <p class="mono tiny subtle mt12">Jan 2023 – Present · Founder / Contributor</p>
+      </div>
+      <div class="card">
+        <h3 class="card-title"><i class="fa-solid fa-pen-fancy"></i> Technical Writing Archive</h3>
+        <p class="small muted">Published technical write-ups on WordPress covering port scanning, security headers, and log analysis automation — each article paired with a working GitHub repository.</p>
+        <ul class="small muted mt8" style="padding-left:1rem">
+          <li>"Building a Python Port Scanner from Scratch"</li>
+          <li>"5 Security Headers Your Website is Missing"</li>
+          <li>"Why I Use Perl-6 for Log Parsing (And It's 30% Faster)"</li>
+        </ul>
+        <a class="btn btn-sec btn-sm mt12" href="https://mnhemon357.wordpress.com/" target="_blank" rel="noopener"><i class="fa-solid fa-external-link-alt"></i> Visit Blog</a>
+      </div>
+      <div class="card">
+        <h3 class="card-title"><i class="fa-solid fa-trophy"></i> Milestones</h3>
+        <ul class="small muted" style="line-height:1.9">
+          <li>Reached OverTheWire Bandit Level 20+</li>
+          <li>Completed PortSwigger Apprentice labs (SQLi, XSS, Access Control)</li>
+          <li>Completed AWS Cloud Practitioner digital training</li>
+          <li>Deployed Security Automation Toolkit v1.0</li>
+          <li>Founded &amp; grew community to active learners</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VIEW 06 — PROJECT
+       ========================================================= -->
+  <section class="view" id="view-project">
+    <div class="grid g2">
+      <div class="proj-card">
+        <div class="row" style="justify-content:space-between"><span class="proj-num">01</span><span class="tag tag-green">Shipped</span></div>
+        <h4>Security Automation Toolkit</h4>
+        <p class="small muted">Modular Python toolkit for automated port scanning, header validation, and log analysis. Reduced manual audit time by 40%.</p>
+        <div class="tech-list"><span class="tag tag-blue">Python 3.9</span><span class="tag tag-blue">socket</span><span class="tag tag-blue">requests</span><span class="tag tag-blue">Docker</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="row" style="justify-content:space-between"><span class="proj-num">02</span><span class="tag tag-green">Shipped</span></div>
+        <h4>Secure Flask Web App</h4>
+        <p class="small muted">Secure login system with bcrypt hashing, CSRF protection, and SQL injection prevention. Addresses OWASP Top 10 Broken Access Control &amp; Cryptographic Failures.</p>
+        <div class="tech-list"><span class="tag tag-blue">Python</span><span class="tag tag-blue">Flask</span><span class="tag tag-blue">SQLAlchemy</span><span class="tag tag-blue">Docker</span><span class="tag tag-blue">Nginx</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="row" style="justify-content:space-between"><span class="proj-num">03</span><span class="tag tag-green">Shipped</span></div>
+        <h4>Perl-6 Log Analyzer</h4>
+        <p class="small muted">High-performance Raku script parsing 1GB+ network log files for brute-force patterns. 30% faster than equivalent Python scripts.</p>
+        <div class="tech-list"><span class="tag tag-purple">Perl-6 / Raku</span><span class="tag">Linux CLI</span><span class="tag">RegEx</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="row" style="justify-content:space-between"><span class="proj-num">04</span><span class="tag tag-green">Shipped</span></div>
+        <h4>Linux Automated Log Parser</h4>
+        <p class="small muted">Bash-based log parser for identifying failed SSH attempts and triggering automated iptables blocks.</p>
+        <div class="tech-list"><span class="tag">Bash</span><span class="tag">grep</span><span class="tag">awk</span><span class="tag">iptables</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="row" style="justify-content:space-between"><span class="proj-num">05</span><span class="tag tag-green">Shipped</span></div>
+        <h4>Vulnerability Alert Bot (v1)</h4>
+        <p class="small muted">Bot integrating Nmap and NVD API to alert users of critical CVEs affecting their local infrastructure.</p>
+        <div class="tech-list"><span class="tag tag-blue">Python</span><span class="tag">Nmap</span><span class="tag">NVD API</span><span class="tag">Telegram API</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="row" style="justify-content:space-between"><span class="proj-num">06</span><span class="tag tag-green">Shipped</span></div>
+        <h4>Portfolio / IBM Carbon UI</h4>
+        <p class="small muted">This site — a single-file hash-routed SPA implementing IBM Carbon dark design tokens.</p>
+        <div class="tech-list"><span class="tag">HTML5</span><span class="tag">Vanilla JS</span><span class="tag">CSS Variables</span><span class="tag">localStorage</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VIEW 07 — UNDERDEVELOPMENT
+       ========================================================= -->
+  <section class="view" id="view-underdevelopment">
+    <div class="grid g2">
+      <div class="wip-card">
+        <div class="row" style="justify-content:space-between"><h4 style="color:#fff;font-size:15px">CyberPulse SOC Dashboard</h4><span class="tag tag-yellow">WIP</span></div>
+        <p class="small muted">Real-time SOC dashboard aggregating logs from Python and Perl-6 analyzers, visualizing attack vectors via a web UI.</p>
+        <div class="wip-progress"><div class="fill" style="width:45%"></div></div>
+        <div class="mono tiny subtle">45% complete · ETA 3 weeks</div>
+      </div>
+      <div class="wip-card">
+        <div class="row" style="justify-content:space-between"><h4 style="color:#fff;font-size:15px">Vulnerability Alert Bot v2</h4><span class="tag tag-yellow">WIP</span></div>
+        <p class="small muted">Telegram &amp; Discord bot integrating Nmap and NVD API to alert users of critical CVEs affecting their local infrastructure.</p>
+        <div class="wip-progress"><div class="fill" style="width:70%"></div></div>
+        <div class="mono tiny subtle">70% complete · ETA 1 week</div>
+      </div>
+      <div class="wip-card">
+        <div class="row" style="justify-content:space-between"><h4 style="color:#fff;font-size:15px">Full Stack Web Dashboard</h4><span class="tag tag-yellow">WIP</span></div>
+        <p class="small muted">Flask + SQLAlchemy backend with IBM Carbon frontend for managing security findings and audit reports.</p>
+        <div class="wip-progress"><div class="fill" style="width:30%"></div></div>
+        <div class="mono tiny subtle">30% complete · ETA 4 weeks</div>
+      </div>
+      <div class="wip-card">
+        <div class="row" style="justify-content:space-between"><h4 style="color:#fff;font-size:15px">Application Development Dashboard</h4><span class="tag tag-yellow">WIP</span></div>
+        <p class="small muted">Android companion app (Java/Kotlin) that triggers your Python security checks and receives alerts.</p>
+        <div class="wip-progress"><div class="fill" style="width:15%"></div></div>
+        <div class="mono tiny subtle">15% complete · ETA 6 weeks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VIEW 08 — PRODUCTION
+       ========================================================= -->
+  <section class="view" id="view-production">
+    <div class="card mb16">
+      <h3 class="card-title"><i class="fa-solid fa-server"></i> Commercial Security Automation Services</h3>
+      <p class="small muted">Production-grade automation, packaged as clear deliverables. Each tier is designed to convert your scripts into a paid offering.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card">
+        <div class="tag tag-blue">Basic</div>
+        <h3 style="margin:10px 0;font-size:22px;color:#fff">$20</h3>
+        <ul class="small muted" style="line-height:1.9;padding-left:1rem">
+          <li>1 custom Python script</li>
+          <li>Port scanner <b>or</b> log analyzer</li>
+          <li>README documentation</li>
+          <li>Delivery in 48 hours</li>
+        </ul>
+      </div>
+      <div class="card" style="border-color:var(--blue)">
+        <div class="tag tag-yellow">Standard</div>
+        <h3 style="margin:10px 0;font-size:22px;color:#fff">$50</h3>
+        <ul class="small muted" style="line-height:1.9;padding-left:1rem">
+          <li>3 scripts + documentation</li>
+          <li>Header checker + log analyzer + scanner</li>
+          <li>Docker packaging included</li>
+          <li>Delivery in 4 days</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="tag tag-green">Premium</div>
+        <h3 style="margin:10px 0;font-size:22px;color:#fff">$500</h3>
+        <ul class="small muted" style="line-height:1.9;padding-left:1rem">
+          <li>Custom Security Automation Toolkit</li>
+          <li>All scripts + CI/CD integration</li>
+          <li>1 hour consultation</li>
+          <li>30-day support</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card mt16">
+      <h3 class="card-title"><i class="fa-solid fa-bolt"></i> Ready-to-Sell Offers</h3>
+      <table class="tbl">
+        <thead><tr><th>Service</th><th>Deliverable</th><th>Price</th><th>Turnaround</th></tr></thead>
+        <tbody>
+          <tr><td>Network Port Audit</td><td>Port scan report (1-1000)</td><td>$30</td><td>24h</td></tr>
+          <tr><td>Web Security Header Audit</td><td>Headers + CSP/HSTS report</td><td>$40</td><td>24h</td></tr>
+          <tr><td>Log Analysis (Perl-6)</td><td>CSV report + summary</td><td>$100</td><td>48h</td></tr>
+          <tr><td>Dockerized Security Tool</td><td>Dockerfile + image</td><td>$100</td><td>48h</td></tr>
+          <tr><td>GitHub Actions Security Gate</td><td>CI/CD workflow</td><td>$200</td><td>72h</td></tr>
+          <tr><td>Master Security Toolkit</td><td>All scripts + docs</td><td>$500</td><td>7 days</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VIEW 09 — LETS_EARN
+       ========================================================= -->
+  <section class="view" id="view-lets_earn">
+    <div class="note blue mb16">
+      <b>The Core Loop:</b> Learn (1h) → Build (2h) → Sell (1h) → Document (1h). 4 hours per day, 30 days, $500+.
+    </div>
+
+    <div class="card mb16">
+      <h3 class="card-title"><i class="fa-solid fa-road"></i> 30-Day / 120-Hour Execution Blueprint</h3>
+      <div id="earnWeeks"></div>
+    </div>
+
+    <div class="card mb16">
+      <h3 class="card-title"><i class="fa-solid fa-dollar-sign"></i> Earnings Breakdown</h3>
+      <table class="tbl">
+        <thead><tr><th>Week</th><th>Focus</th><th>Action</th><th>Target</th></tr></thead>
+        <tbody>
+          <tr><td><b>Week 1</b></td><td>Network</td><td>Port Scanner + Service ID</td><td>$50</td></tr>
+          <tr><td><b>Week 2</b></td><td>Web</td><td>Header Checker + SQLi Test</td><td>$150</td></tr>
+          <tr><td><b>Week 3</b></td><td>Logs</td><td>Log Analyzer + Docker</td><td>$200</td></tr>
+          <tr><td><b>Week 4</b></td><td>DevOps</td><td>GitHub Actions + Bounty</td><td>$200</td></tr>
+          <tr style="background:#1e1e1e"><td><b>TOTAL</b></td><td colspan="2"><b>30-Day Target</b></td><td><b class="text-green">$600</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card mb16">
+      <h3 class="card-title"><i class="fa-solid fa-clock"></i> Daily Routine (4 Hours)</h3>
+      <div class="grid g4">
+        <div class="sprint-hour" style="border-left-color:var(--blue)"><h5 style="color:var(--blue-60)">09:00 – 10:00</h5><p><b>Learn</b><br>Docs, tutorials, concept</p></div>
+        <div class="sprint-hour" style="border-left-color:var(--green)"><h5 style="color:var(--green)">10:00 – 12:00</h5><p><b>Build</b><br>Code, debug, test</p></div>
+        <div class="sprint-hour" style="border-left-color:var(--yellow)"><h5 style="color:var(--yellow)">12:00 – 13:00</h5><p><b>Sell</b><br>Emails, Fiverr, replies</p></div>
+        <div class="sprint-hour" style="border-left-color:var(--magenta)"><h5 style="color:var(--magenta)">13:00 – 14:00</h5><p><b>Document</b><br>README, blog, commits</p></div>
+      </div>
+    </div>
+
+    <div class="card mb16">
+      <h3 class="card-title"><i class="fa-solid fa-language"></i> আপনার ১২০-ঘণ্টার "সাইবার সিকিউরিটি" ইনকাম স্প্রিন্ট</h3>
+      <div class="grid g2">
+        <div class="sprint-hour"><h5>ঘণ্টা ০-৫: ডিজিটাল আইডেন্টিটি তৈরি</h5>
+          <ul>
+            <li>GitHub Bio আপডেট: <code>Security Automation Engineer | Python &amp; Perl-6 | CSE @ DIU</code></li>
+            <li><code>nazmul-security-toolkit</code> রিপো সেটআপ (scanners, analyzers, docs)</li>
+            <li><code>port_scanner.py</code> লিখুন ও localhost-এ টেস্ট করুন</li>
+            <li>টার্মিনাল আউটপুটের স্ক্রিনশট নিন</li>
+          </ul>
+        </div>
+        <div class="sprint-hour"><h5>ঘণ্টা ৫-১৫: প্রুফ অব ওয়ার্ক</h5>
+          <ul>
+            <li>README.md লিখুন (Title, Description, Usage, Screenshot)</li>
+            <li>WordPress-এ পোস্ট: "Building a Python Port Scanner from Scratch"</li>
+            <li>LinkedIn হেডলাইন আপডেট করুন</li>
+            <li>সোশ্যাল পোস্ট: "Just published my first security automation script."</li>
+          </ul>
+        </div>
+        <div class="sprint-hour"><h5>ঘণ্টা ১৫-৪৫: মাইক্রো-সার্ভিস তৈরি</h5>
+          <ul>
+            <li>প্রোডাক্ট ১: <code>header_checker.py</code> (CSP, X-Frame, HSTS)</li>
+            <li>প্রোডাক্ট ২: <code>log_analyzer.raku</code> (ERROR/CRITICAL count)</li>
+            <li>Fiverr গিগ: Basic $20 / Standard $50 / Premium $100</li>
+          </ul>
+        </div>
+        <div class="sprint-hour"><h5>ঘণ্টা ৪৫-৭৫: কোল্ড আউটরিচ</h5>
+          <ul>
+            <li>BuiltWith দিয়ে ১০টি স্টার্টআপের টেক স্ট্যাক চেক করুন</li>
+            <li>১০টি কোল্ড ইমেইল পাঠান (নিচের টেমপ্লেট)</li>
+            <li>Upwork-এ ৩টি প্রোপোজাল পাঠান</li>
+          </ul>
+        </div>
+        <div class="sprint-hour"><h5>ঘণ্টা ৭৫-১০৫: স্কিল ডিপথ</h5>
+          <ul>
+            <li>Docker: <code>FROM python:3.9-slim</code> ইমেজ বিল্ড করুন</li>
+            <li>Juice Shop-এ OWASP Top 10-এর ৩টি ভাউলনারাবিলিটি খুঁজুন</li>
+            <li>Write-up লিখুন ও WordPress-এ পাবলিশ করুন</li>
+          </ul>
+        </div>
+        <div class="sprint-hour"><h5>ঘণ্টা ১০৫-১২০: ফলো-আপ ও অপ্টিমাইজেশন</h5>
+          <ul>
+            <li>৩টি ফলো-আপ ইমেইল পাঠান</li>
+            <li>রিজিউমে Projects সেকশন আপডেট করুন</li>
+            <li>Expectations: $200-$500 (প্রথম ১২০ ঘণ্টায়)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb16">
+      <h3 class="card-title"><i class="fa-solid fa-envelope-open-text"></i> Copy-Paste Email Templates</h3>
+      <div class="mb16">
+        <h4 style="font-size:13px;color:var(--text-muted);margin-bottom:6px">Cold Email — Week 1 (Network Audit)</h4>
+        <div class="email-box">Subject: Quick security audit for [Company Name]
+
+Hi [Name],
+
+I noticed [Company Name] uses [Tech, e.g., WordPress/Custom Web App]. I'm a CSE student specializing in security automation.
+
+I've built a custom Python toolkit that can quickly identify common security gaps (like exposed ports or weak credentials) without disrupting your operations.
+
+I'd like to offer a free 3-point security audit of your public-facing web presence. No strings attached.
+
+Let me know if you're interested.
+
+Best,
+Nazmul Hossain
+Security Automation Engineer
+https://mnhemon357.wordpress.com/ | [GitHub Link]
+<button class="copy-btn" onclick="copyEmail(this)">COPY</button></div>
+      </div>
+      <div class="mb16">
+        <h4 style="font-size:13px;color:var(--text-muted);margin-bottom:6px">Cold Email — Week 2 (Web Audit)</h4>
+        <div class="email-box">Subject: Your site is missing HSTS — quick 3-point audit
+
+Hi [Name],
+
+I ran a quick check on [site] and noticed it is missing a few critical security headers (HSTS, CSP, X-Frame-Options). These are easy wins that reduce your attack surface.
+
+Here's a free 3-point audit attached. Want the full report with remediation steps?
+
+Best,
+Nazmul Hossain
+Security Automation Engineer
+<button class="copy-btn" onclick="copyEmail(this)">COPY</button></div>
+      </div>
+      <div class="mb16">
+        <h4 style="font-size:13px;color:var(--text-muted);margin-bottom:6px">Cold Email — Week 3 (Log Analysis)</h4>
+        <div class="email-box">Subject: Automate your server log analysis (Perl-6)
+
+Hi [Name],
+
+I can automate your log analysis to detect brute-force attacks. My Perl-6/ Raku analyzer is ~30% faster than the equivalent Python script and outputs a clean CSV.
+
+Want a free sample of your last 24h logs analyzed?
+
+Best,
+Nazmul Hossain
+<button class="copy-btn" onclick="copyEmail(this)">COPY</button></div>
+      </div>
+      <div class="mb16">
+        <h4 style="font-size:13px;color:var(--text-muted);margin-bottom:6px">Cold Email — Week 4 (CI/CD)</h4>
+        <div class="email-box">Subject: Automate security checks in your CI/CD
+
+Hi [Name],
+
+I can automate your security checks in your CI/CD pipeline via GitHub Actions. I recently built a workflow that runs header checks + port scans on every PR.
+
+Want a free setup for your repo?
+
+Best,
+Nazmul Hossain
+<button class="copy-btn" onclick="copyEmail(this)">COPY</button></div>
+      </div>
+      <div>
+        <h4 style="font-size:13px;color:var(--text-muted);margin-bottom:6px">Follow-Up Template</h4>
+        <div class="email-box">Hi [Name],
+
+Just following up on my previous email. I've attached a quick 3-point audit of your website. Let me know if you'd like to discuss any of the findings.
+
+Best,
+Nazmul Hossain
+<button class="copy-btn" onclick="copyEmail(this)">COPY</button></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title"><i class="fa-solid fa-terminal"></i> Starter Code Snippets</h3>
+      <div class="grid g2">
+        <div>
+          <h4 style="font-size:12px;color:var(--text-subtle);margin-bottom:6px">port_scanner.py</h4>
+<pre>import socket
+
+def port_scan(ip, start_port, end_port):
+    open_ports = []
+    for port in range(start_port, end_port + 1):
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(1)
+        result = sock.connect_ex((ip, port))
+        if result == 0:
+            open_ports.append(port)
+        sock.close()
+    return open_ports
+
+if __name__ == "__main__":
+    print(port_scan("127.0.0.1", 1, 1000))</pre>
+        </div>
+        <div>
+          <h4 style="font-size:12px;color:var(--text-subtle);margin-bottom:6px">header_checker.py</h4>
+<pre>import requests
+
+def check_headers(url):
+    headers = requests.get(url).headers
+    checks = {
+        "Content-Security-Policy": "CSP",
+        "X-Frame-Options": "X-Frame",
+        "Strict-Transport-Security": "HSTS"
+    }
+    report = {name: (header in headers) for header, name in checks.items()}
+    return report
+
+if __name__ == "__main__":
+    print(check_headers("https://example.com"))</pre>
+        </div>
+        <div>
+          <h4 style="font-size:12px;color:var(--text-subtle);margin-bottom:6px">log_analyzer.raku</h4>
+<pre>use v6;
+
+my %failed;
+for 'access.log'.IO.lines -> $line {
+    if $line ~~ / "Failed login" .* "from " (\S+)/ {
+        %failed{$0}++;
+    }
+}
+
+for %failed.kv -> $ip, $count {
+    say "$ip,$count" if $count > 5;
+}</pre>
+        </div>
+        <div>
+          <h4 style="font-size:12px;color:var(--text-subtle);margin-bottom:6px">.github/workflows/security-audit.yml</h4>
+<pre>name: Security Audit
+on: [pull_request]
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with: { python-version: '3.10' }
+      - run: pip install requests
+      - run: python header_checker.py https://example.com</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VIEW 10 — RESOURCES
+       ========================================================= -->
+  <section class="view" id="view-resources">
+    <div class="note blue mb16"><b>Digital Library:</b> Curated, free, and high-signal resources for security automation and CS fundamentals.</div>
+    <h3 style="font-size:14px;color:#fff;margin-bottom:12px">Training &amp; Labs</h3>
+    <div class="grid g2 mb16">
+      <a class="res-link" href="https://academy.linuxfoundation.org/" target="_blank" rel="noopener"><i class="fa-brands fa-linux"></i><div><div class="rname">Linux Foundation</div><div class="rdesc">Official Linux &amp; cloud-native training</div></div></a>
+      <a class="res-link" href="https://www.offsec.com/" target="_blank" rel="noopener"><i class="fa-solid fa-skull"></i><div><div class="rname">OffSec (Kali)</div><div class="rdesc">OSCP, PEN-200, advanced labs</div></div></a>
+      <a class="res-link" href="https://www.darktrace.com/" target="_blank" rel="noopener"><i class="fa-solid fa-brain"></i><div><div class="rname">Darktrace</div><div class="rdesc">AI-driven cyber defense</div></div></a>
+      <a class="res-link" href="https://portswigger.net/web-security" target="_blank" rel="noopener"><i class="fa-solid fa-shield-halved"></i><div><div class="rname">PortSwigger Academy</div><div class="rdesc">Free OWASP Top 10 labs</div></div></a>
+      <a class="res-link" href="https://overthewire.org/wargames/bandit/" target="_blank" rel="noopener"><i class="fa-solid fa-terminal"></i><div><div class="rname">OverTheWire Bandit</div><div class="rdesc">Linux CLI wargame</div></div></a>
+      <a class="res-link" href="https://tryhackme.com/" target="_blank" rel="noopener"><i class="fa-solid fa-door-open"></i><div><div class="rname">TryHackMe</div><div class="rdesc">Guided CTF-style rooms</div></div></a>
+      <a class="res-link" href="https://www.hackerone.com/" target="_blank" rel="noopener"><i class="fa-solid fa-bug"></i><div><div class="rname">HackerOne</div><div class="rdesc">Bug bounty platform</div></div></a>
+      <a class="res-link" href="https://skillbuilder.aws/" target="_blank" rel="noopener"><i class="fa-brands fa-aws"></i><div><div class="rname">AWS Skill Builder</div><div class="rdesc">Cloud practitioner training</div></div></a>
+    </div>
+
+    <h3 style="font-size:14px;color:#fff;margin-bottom:12px">Documentation &amp; References</h3>
+    <div class="grid g2 mb16">
+      <a class="res-link" href="https://owasp.org/Top10/" target="_blank" rel="noopener"><i class="fa-solid fa-globe"></i><div><div class="rname">OWASP Top 10</div><div class="rdesc">Web app security risks</div></div></a>
+      <a class="res-link" href="https://docs.raku.org/" target="_blank" rel="noopener"><i class="fa-solid fa-code"></i><div><div class="rname">Raku Docs</div><div class="rdesc">Perl-6 language reference</div></div></a>
+      <a class="res-link" href="https://docs.python.org/3/" target="_blank" rel="noopener"><i class="fa-brands fa-python"></i><div><div class="rname">Python Docs</div><div class="rdesc">Official Python 3 reference</div></div></a>
+      <a class="res-link" href="https://www.professormesser.com/" target="_blank" rel="noopener"><i class="fa-solid fa-graduation-cap"></i><div><div class="rname">Professor Messer</div><div class="rdesc">Network+ / Security+ prep</div></div></a>
+      <a class="res-link" href="https://automatetheboringstuff.com/" target="_blank" rel="noopener"><i class="fa-solid fa-book"></i><div><div class="rname">Automate the Boring Stuff</div><div class="rdesc">Free Python automation book</div></div></a>
+      <a class="res-link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers" target="_blank" rel="noopener"><i class="fa-solid fa-file-code"></i><div><div class="rname">MDN HTTP Headers</div><div class="rdesc">Complete header reference</div></div></a>
+    </div>
+
+    <h3 style="font-size:14px;color:#fff;margin-bottom:12px">Free Security Books (PDF / Web)</h3>
+    <div class="grid g2">
+      <a class="res-link" href="https://www.owasp.org/www-project-web-security-testing-guide/" target="_blank" rel="noopener"><i class="fa-solid fa-book-open"></i><div><div class="rname">OWASP Testing Guide</div><div class="rdesc">Free PDF — the web app testing bible</div></div></a>
+      <a class="res-link" href="https://github.com/enaqx/awesome-pentest" target="_blank" rel="noopener"><i class="fa-solid fa-book-open"></i><div><div class="rname">Awesome Pentest</div><div class="rdesc">Curated GitHub reading list</div></div></a>
+      <a class="res-link" href="https://www.blackhat.com/docs/" target="_blank" rel="noopener"><i class="fa-solid fa-book-open"></i><div><div class="rname">Black Hat Archives</div><div class="rdesc">Free whitepapers and slide decks</div></div></a>
+      <a class="res-link" href="https://nostarch.com/" target="_blank" rel="noopener"><i class="fa-solid fa-book-open"></i><div><div class="rname">No Starch Press</div><div class="rdesc">Gray Hat Python, Black Hat Python samples</div></div></a>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VIEW 11 — GET_IN_TOUCH
+       ========================================================= -->
+  <section class="view" id="view-get_in_touch">
+    <div class="grid g2">
+      <div class="card">
+        <h3 class="card-title"><i class="fa-solid fa-share-nodes"></i> Connect</h3>
+        <a class="social-btn" href="mailto:mnhemon357@gmail.com"><i class="fa-solid fa-envelope"></i><div><div class="lbl">Email</div><div class="sub">mnhemon357@gmail.com</div></div></a>
+        <a class="social-btn" href="https://mnhemon357.wordpress.com/" target="_blank" rel="noopener" style="margin-top:8px"><i class="fa-brands fa-wordpress"></i><div><div class="lbl">WordPress Portfolio</div><div class="sub">mnhemon357.wordpress.com</div></div></a>
+        <a class="social-btn" href="https://facebook.com/profile.php?id=100077713088455" target="_blank" rel="noopener" style="margin-top:8px"><i class="fa-brands fa-facebook"></i><div><div class="lbl">Facebook</div><div class="sub">Nazmul Hossain</div></div></a>
+        <a class="social-btn" href="https://github.com/" target="_blank" rel="noopener" style="margin-top:8px"><i class="fa-brands fa-github"></i><div><div class="lbl">GitHub</div><div class="sub">nazmul-security-toolkit</div></div></a>
+        <a class="social-btn" href="https://www.linkedin.com/" target="_blank" rel="noopener" style="margin-top:8px"><i class="fa-brands fa-linkedin"></i><div><div class="lbl">LinkedIn</div><div class="sub">Security Automation Engineer</div></div></a>
+      </div>
+      <div class="card">
+        <h3 class="card-title"><i class="fa-solid fa-paper-plane"></i> Send a Message</h3>
+        <form onsubmit="event.preventDefault();showToast('Message sent successfully (simulated).');this.reset();">
+          <div class="field"><label>Name</label><input type="text" required placeholder="Your name"></div>
+          <div class="field"><label>Email</label><input type="email" required placeholder="you@example.com"></div>
+          <div class="field"><label>Message</label><textarea required placeholder="Tell me about your project..."></textarea></div>
+          <button type="submit" class="btn" style="width:100%;justify-content:center"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+        </form>
+      </div>
+    </div>
+    <div class="card mt16">
+      <h3 class="card-title"><i class="fa-solid fa-address-card"></i> Availability</h3>
+      <table class="tbl">
+        <tr><td style="width:35%"><b>Open to</b></td><td>SOC L1, Security Automation, Perl-6 Log Analysis, Freelance Scripting</td></tr>
+        <tr><td><b>Timezone</b></td><td>Asia/Dhaka (UTC+6)</td></tr>
+        <tr><td><b>Response time</b></td><td>Within 24 hours</td></tr>
+        <tr><td><b>Preferred contact</b></td><td>Email — mnhemon357@gmail.com</td></tr>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<!-- =========================================================
+     MODAL
+     ========================================================= -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="kicker" id="modalKicker">DETAIL</div>
+        <h3 id="modalTitle">Title</h3>
+      </div>
+      <button class="close" onclick="closeModal()" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     TOAST
+     ========================================================= -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   DATA
+   ========================================================= */
+
+const SKILLS = [
+  {
+    id: 'python', name: 'Python', icon: 'fa-brands fa-python', cat: 'languages', level: 82,
+    desc: 'Automation · Security Tools · Scripting',
+    overview: 'Python is the backbone of your security automation. Master socket, requests, subprocess, and os modules — every other tool on this portal is built on them.',
+    roadmap: [
+      {t:'Fundamentals', d:'Variables, control flow, functions, list/dict comprehensions, error handling'},
+      {t:'File & OS', d:'pathlib, os, subprocess, shutil — automate Linux workflows'},
+      {t:'Networking', d:'socket, requests, ssl — build port scanners and HTTP checkers'},
+      {t:'Concurrency', d:'threading and multiprocessing — scan 1000 ports in seconds'},
+      {t:'Packaging', d:'pyproject.toml, entry points, pip install -e .'},
+      {t:'Security Focus', d:'Parse logs, detect anomalies, generate reports'}
+    ],
+    resources: ['https://docs.python.org/3/', 'https://automatetheboringstuff.com/', 'https://realpython.com/'],
+    project: 'Build the port_scanner.py and header_checker.py from the Earn section — these become your Fiverr gigs.'
+  },
+  {
+    id: 'raku', name: 'Perl-6 / Raku', icon: 'fa-solid fa-code', cat: 'languages', level: 65,
+    desc: 'Log Parsing · High-Performance Regex',
+    overview: 'Raku (formerly Perl 6) is your competitive edge. Rare skill, blazing regex, and 30% faster log parsing than Python for large files.',
+    roadmap: [
+      {t:'Syntax Basics', d:'Variables, sigils, junctions, and set operators'},
+      {t:'Regex Engine', d:'Grammars, named captures, and the `~~` smart-match operator'},
+      {t:'File IO', d:'slurp, lines, and lazy streams for multi-GB logs'},
+      {t:'Parallelism', d:'hyper / race operators for concurrent parsing'},
+      {t:'Log Analysis', d:'Parse Apache/Nginx/SSH logs, extract IPs and timestamps'},
+      {t:'Report Output', d:'CSV, JSON, and summary tables'}
+    ],
+    resources: ['https://docs.raku.org/', 'https://raku.org/', 'https://examples.raku.org/'],
+    project: 'Build log_analyzer.raku that parses 1GB+ Apache logs and outputs IPs with >5 failed logins.'
+  },
+  {
+    id: 'c', name: 'C', icon: 'fa-solid fa-c', cat: 'languages', level: 55,
+    desc: 'Memory · Pointers · Binary Systems',
+    overview: 'C teaches you how memory actually works — pointer arithmetic, stack vs heap, and how binaries execute. Essential for understanding exploits.',
+    roadmap: [
+      {t:'Memory Model', d:'Stack, heap, BSS, .data — where do variables live?'},
+      {t:'Pointers', d:'Pointer arithmetic, double pointers, function pointers'},
+      {t:'Syscalls', d:'fork, exec, read, write — how Linux processes really work'},
+      {t:'Binaries', d:'ELF format, objdump, gdb basics'},
+      {t:'Buffer Overflows', d:'Understand stack overflows conceptually (read-only)'}
+    ],
+    resources: ['https://beej.us/guide/bgc/', 'https://www.learn-c.org/', 'https://overthewire.org/wargames/'],
+    project: 'Write a minimal port scanner in C using raw sockets (educational).'
+  },
+  {
+    id: 'java', name: 'Java', icon: 'fa-brands fa-java', cat: 'languages', level: 50,
+    desc: 'OOP · Application Development',
+    overview: 'Java underpins enterprise security tooling. OOP concepts, memory management, and JVM understanding translate to Android and backend roles.',
+    roadmap: [
+      {t:'OOP', d:'Classes, inheritance, polymorphism, interfaces'},
+      {t:'Collections', d:'ArrayList, HashMap, streams API'},
+      {t:'Concurrency', d:'Threads, executors, CompletableFuture'},
+      {t:'Security', d:'Input validation, deserialization risks, JWT handling'},
+      {t:'Android', d:'Activities, services, and connecting to a Python backend'}
+    ],
+    resources: ['https://dev.java/learn/', 'https://www.baeldung.com/', 'https://developer.android.com/'],
+    project: 'Application Development Dashboard — Android app that triggers Python security checks.'
+  },
+  {
+    id: 'bash', name: 'Bash', icon: 'fa-solid fa-terminal', cat: 'languages', level: 78,
+    desc: 'Linux CLI · Automation',
+    overview: 'Bash is the glue. Combine Python, Raku, and system tools into reproducible pipelines.',
+    roadmap: [
+      {t:'Basics', d:'Variables, arrays, conditionals, loops'},
+      {t:'Text Tools', d:'grep, sed, awk, cut, sort, uniq'},
+      {t:'Cron & Timers', d:'Automate scripts with cron and systemd timers'},
+      {t:'Pipelines', d:'Combine tools into one-liners'},
+      {t:'Linux Admin', d:'User management, iptables, log rotation'}
+    ],
+    resources: ['https://www.gnu.org/software/bash/manual/', 'https://overthewire.org/wargames/bandit/'],
+    project: 'Write a bash script that parses /var/log/auth.log and blocks IPs with >10 failed SSH logins via iptables.'
+  },
+  {
+    id: 'sql', name: 'SQL', icon: 'fa-solid fa-database', cat: 'languages', level: 60,
+    desc: 'DB Security · Injection Prevention',
+    overview: 'SQL is essential for understanding SQL injection (the #1 web vulnerability) and building secure backends.',
+    roadmap: [
+      {t:'Basics', d:'SELECT, JOIN, GROUP BY, subqueries'},
+      {t:'Security', d:'Parameterized queries, least privilege, row-level security'},
+      {t:'SQLi', d:'Understand `\' OR 1=1 --` and why prepared statements matter'},
+      {t:'Hardening', d:'Disable dangerous functions, audit logs'}
+    ],
+    resources: ['https://portswigger.net/web-security/sql-injection', 'https://sqlite.org/docs.html'],
+    project: 'Exploit a deliberately vulnerable Juice Shop login, then patch it with parameterized queries.'
+  },
+  {
+    id: 'kali', name: 'Kali Linux', icon: 'fa-brands fa-linux', cat: 'os', level: 72,
+    desc: 'Penetration Testing OS',
+    overview: 'Kali is your pentesting toolkit. Learn the tools, but more importantly — the workflow.',
+    roadmap: [
+      {t:'Nmap', d:'Port scanning, service version, OS fingerprinting'},
+      {t:'Wireshark', d:'Packet capture and traffic analysis'},
+      {t:'Burp Suite', d:'Intercepting proxy, repeater, intruder'},
+      {t:'Metasploit', d:'Modules, payloads, exploit workflow'},
+      {t:'OWASP ZAP', d:'Automated web scanning'}
+    ],
+    resources: ['https://www.kali.org/docs/', 'https://nmap.org/book/', 'https://portswigger.net/burp'],
+    project: 'Set up a local lab (VirtualBox) with Metasploitable and Metasploit to practice safe exploitation.'
+  },
+  {
+    id: 'owasp', name: 'OWASP Top 10', icon: 'fa-solid fa-shield-halved', cat: 'security', level: 70,
+    desc: 'Web Vulnerabilities',
+    overview: 'The OWASP Top 10 is the lingua franca of web security. You must know all 10 — and how to test each.',
+    roadmap: [
+      {t:'A01 Broken Access Control', d:'IDOR, missing function-level auth'},
+      {t:'A02 Cryptographic Failures', d:'Weak TLS, plaintext storage, weak hashing'},
+      {t:'A03 Injection', d:'SQLi, NoSQLi, OS command injection'},
+      {t:'A04 Insecure Design', d:'Threat modeling, missing rate limits'},
+      {t:'A05 Security Misconfiguration', d:'Default creds, verbose errors, missing headers'},
+      {t:'A06 Vulnerable Components', d:'Dependency scanning, CVE lookup'},
+      {t:'A07 Auth Failures', d:'Session fixation, weak MFA, credential stuffing'},
+      {t:'A08 Data Integrity Failures', d:'Unsigned updates, deserialization'},
+      {t:'A09 Logging Failures', d:'Missing detection, no SIEM'},
+      {t:'A10 SSRF', d:'Server-side request forgery patterns'}
+    ],
+    resources: ['https://owasp.org/Top10/', 'https://portswigger.net/web-security'],
+    project: 'Complete 5 PortSwigger Apprentice labs and write one blog post per vulnerability class.'
+  },
+  {
+    id: 'docker', name: 'Docker', icon: 'fa-brands fa-docker', cat: 'cloud', level: 62,
+    desc: 'Containerization · DevSecOps',
+    overview: 'Package your scripts into containers so they run anywhere. One command deployment = repeatable audits.',
+    roadmap: [
+      {t:'Dockerfile', d:'FROM, COPY, RUN, CMD, ENTRYPOINT'},
+      {t:'Build & Run', d:'docker build -t, docker run --rm'},
+      {t:'Multi-stage', d:'Shrink images from 900MB to 100MB'},
+      {t:'Compose', d:'Multi-service stacks (Flask + DB + Scanner)'},
+      {t:'Security', d:'Non-root user, read-only FS, scanning images with trivy'}
+    ],
+    resources: ['https://docs.docker.com/', 'https://labs.play-with-docker.com/'],
+    project: 'Dockerize header_checker.py — image under 100MB, non-root user, single-command run.'
+  },
+  {
+    id: 'aws', name: 'AWS', icon: 'fa-brands fa-aws', cat: 'cloud', level: 45,
+    desc: 'Cloud Security · IAM · S3',
+    overview: 'AWS is where most production security work happens. Start with IAM, EC2, and S3 — then move to GuardDuty and CloudTrail.',
+    roadmap: [
+      {t:'IAM', d:'Users, roles, policies, least privilege'},
+      {t:'EC2', d:'Instances, security groups, SSH hardening'},
+      {t:'S3', d:'Bucket policies, public-access block, encryption'},
+      {t:'CloudTrail', d:'API logging and threat detection'},
+      {t:'GuardDuty', d:'Managed threat detection'}
+    ],
+    resources: ['https://skillbuilder.aws/', 'https://aws.amazon.com/security/'],
+    project: 'Deploy a Python security tool to EC2, store logs in S3, and alert via CloudWatch.'
+  },
+  {
+    id: 'git', name: 'Git / GitHub', icon: 'fa-brands fa-github', cat: 'cloud', level: 80,
+    desc: 'Version Control · CI/CD',
+    overview: 'Git is non-negotiable. Branch, commit, push, PR — and then automate with GitHub Actions.',
+    roadmap: [
+      {t:'Basics', d:'init, add, commit, push, pull, branch'},
+      {t:'PRs', d:'Fork, branch, PR, code review workflow'},
+      {t:'Actions', d:'Workflows, jobs, steps, secrets'},
+      {t:'Security', d:'Dependabot, secret scanning, CodeQL'}
+    ],
+    resources: ['https://docs.github.com/actions', 'https://learngitbranching.js.org/'],
+    project: 'Build the security-audit.yml workflow that runs header_checker.py on every PR.'
+  },
+  {
+    id: 'burp', name: 'Burp Suite', icon: 'fa-solid fa-spider', cat: 'security', level: 58,
+    desc: 'Web Pentesting Proxy',
+    overview: 'Burp intercepts HTTP, lets you modify requests, and fuzz inputs. It is the #1 web security tool.',
+    roadmap: [
+      {t:'Proxy', d:'Intercept, modify, replay requests'},
+      {t:'Repeater', d:'Craft and resend individual requests'},
+      {t:'Intruder', d:'Automated fuzzing with payload lists'},
+      {t:'Scanner', d:'Pro-only automated scanning'},
+      {t:'Extender', d:'Write custom extensions in Python/Java'}
+    ],
+    resources: ['https://portswigger.net/burp/documentation'],
+    project: 'Intercept a login form in Juice Shop and test SQLi payloads.'
+  },
+  {
+    id: 'wireshark', name: 'Wireshark', icon: 'fa-solid fa-water', cat: 'security', level: 55,
+    desc: 'Network Analysis',
+    overview: 'Packet-level visibility. Learn to filter, follow streams, and spot anomalies.',
+    roadmap: [
+      {t:'Capture', d:'Interface selection, capture filters'},
+      {t:'Display Filters', d:'tcp.port, http.request, ip.addr'},
+      {t:'Follow Streams', d:'Reconstruct HTTP, TLS, DNS'},
+      {t:'Anomalies', d:'Spot ARP spoofing, DNS tunneling, scans'}
+    ],
+    resources: ['https://www.wireshark.org/docs/'],
+    project: 'Capture a port scan and identify the scanning IP from the pcap.'
+  },
+  {
+    id: 'nmap', name: 'Nmap', icon: 'fa-solid fa-radar', cat: 'security', level: 75,
+    desc: 'Port Scanning · Service Detection',
+    overview: 'The port scanner. Master the flags and the scripting engine (NSE).',
+    roadmap: [
+      {t:'Basic Scans', d:'-sS, -sT, -sn'},
+      {t:'Service Detection', d:'-sV, -A'},
+      {t:'Scripts', d:'NSE — vuln, http-*, smb-*'},
+      {t:'Timing', d:'-T4 for fast, -T1 for stealth'}
+    ],
+    resources: ['https://nmap.org/book/'],
+    project: 'Scan a local Metasploitable VM and identify all services.'
+  },
+  {
+    id: 'soc-dashboard', name: 'CyberPulse SOC Dashboard', icon: 'fa-solid fa-chart-line', cat: 'projects', level: 20,
+    desc: 'Project 1 · Full learning guide',
+    overview: 'A real-time SOC dashboard that ingests logs, correlates alerts, and visualizes attack vectors. This is your flagship project.',
+    roadmap: [
+      {t:'Phase 1 — Ingest', d:'Python + Raku parsers feed a SQLite time-series of events'},
+      {t:'Phase 2 — Correlate', d:'Rule engine: 10 failed logins in 5 minutes = alert'},
+      {t:'Phase 3 — Visualize', d:'Flask + IBM Carbon frontend with live charts'},
+      {t:'Phase 4 — Alert', d:'Telegram bot integration'},
+      {t:'Phase 5 — Deploy', d:'Docker Compose — one command to run'}
+    ],
+    resources: ['https://flask.palletsprojects.com/', 'https://www.chartjs.org/', 'https://core.telegram.org/bots'],
+    project: 'Ship v0.5 as a GitHub repo with a demo GIF. It becomes your flagship portfolio piece.'
+  },
+  {
+    id: 'web-dashboard', name: 'Full Stack Web Dashboard', icon: 'fa-solid fa-layer-group', cat: 'projects', level: 30,
+    desc: 'Project 2 · Full learning guide',
+    overview: 'A secure multi-user dashboard for managing security findings — logins, roles, reports, exports.',
+    roadmap: [
+      {t:'Backend', d:'Flask + SQLAlchemy + Alembic migrations'},
+      {t:'Auth', d:'bcrypt + JWT + CSRF tokens'},
+      {t:'Frontend', d:'IBM Carbon Design tokens, responsive tables'},
+      {t:'Reports', d:'PDF generation via WeasyPrint'},
+      {t:'Deploy', d:'Docker + Nginx + Let\'s Encrypt'}
+    ],
+    resources: ['https://flask.palletsprojects.com/', 'https://www.sqlalchemy.org/', 'https://carbondesignsystem.com/'],
+    project: 'Ship a v1 that supports 3 roles (admin, analyst, viewer) and one report type.'
+  },
+  {
+    id: 'app-dashboard', name: 'Application Development Dashboard', icon: 'fa-solid fa-mobile-screen', cat: 'projects', level: 10,
+    desc: 'Project 3 · Full learning guide',
+    overview: 'A mobile companion app (Java/Kotlin) that triggers Python security checks and receives alerts.',
+    roadmap: [
+      {t:'Android Basics', d:'Activities, Intents, RecyclerView'},
+      {t:'Networking', d:'Retrofit + OkHttp — talk to your Flask backend'},
+      {t:'Auth', d:'JWT stored in EncryptedSharedPreferences'},
+      {t:'Push', d:'Firebase Cloud Messaging for alerts'},
+      {t:'Play Store', d:'Signing, versioning, store listing'}
+    ],
+    resources: ['https://developer.android.com/', 'https://square.github.io/retrofit/'],
+    project: 'MVP: a login screen and a scan-trigger button connected to your Flask backend.'
+  }
+];
+
+const TASKS_BN = [
+  'GitHub প্রোফাইল সেটআপ এবং Bio আপডেট করুন',
+  'Security Toolkit রিপোজিটরি তৈরি করুন',
+  'Python Port Scanner (port_scanner.py) লিখুন',
+  'Port Scanner লোকাল নেটওয়ার্কে টেস্ট করুন',
+  'README.md ফাইল তৈরি করুন',
+  'WordPress-এ প্রথম পোস্ট লিখুন',
+  'LinkedIn হেডলাইন আপডেট করুন',
+  'Security Header Checker (header_checker.py) লিখুন',
+  'OWASP Top 10 চেকলিস্ট রিভিউ করুন',
+  'Fiverr গিগ তৈরি করুন (Basic $20)',
+  '১০টি কোল্ড ইমেইল পাঠান',
+  'Log Analyzer (log_analyzer.raku) লিখুন',
+  'Perl-6 Regex ডকুমেন্টেশন পড়ুন',
+  'Log Analyzer-এর জন্য Dockerfile তৈরি করুন',
+  'Docker কনটেইনার বিল্ড এবং রান করুন',
+  'Fiverr গিগ আপডেট করুন ($100)',
+  'Upwork-এ ৩টি প্রোপোজাল পাঠান',
+  'GitHub Actions (security-audit.yml) সেটআপ করুন',
+  'CI/CD পাইপলাইনে স্ক্রিপ্ট ইন্টিগ্রেট করুন',
+  '৫টি ডেভ টিমকে ইমেইল পাঠান',
+  'HackerOne-এ রেজিস্ট্রেশন করুন',
+  'লক্ষ্য সাইটের পোর্ট স্ক্যান করুন',
+  'লক্ষ্য সাইটের হেডার চেক করুন',
+  'একটি ছোট বাগ রিপোর্ট করুন',
+  'Master Toolkit রিপোজিটরি তৈরি করুন',
+  'সব স্ক্রিপ্ট একত্রিত করুন',
+  'Fiverr Premium গিগ ($500) চালু করুন',
+  'WordPress-এ ৩০ দিনের জার্নি পোস্ট লিখুন',
+  'রিজিউমে প্রজেক্ট লিংক আপডেট করুন',
+  'ক্লায়েন্ট ফলো-আপ ইমেইল পাঠান',
+  'মাসিক আর্নিং এবং লার্নিং রিভিউ করুন'
+];
+
+const CERTS = [
+  { name:'Cisco Junior Cybersecurity Analyst', issuer:'Cisco Networking Academy', icon:'fa-solid fa-shield-halved', body:'Foundational cybersecurity certification covering network security, endpoint security, and vulnerability management workflows.<br><br><b>Status:</b> Verified · <b>Issuer:</b> Cisco Networking Academy' },
+  { name:'Qualys VMDR', issuer:'Qualys', icon:'fa-solid fa-bug', body:'Vulnerability Management, Detection and Response certification — proficiency in vulnerability assessment and remediation workflows.<br><br><b>Status:</b> Verified · <b>Issuer:</b> Qualys' },
+  { name:'IBM Professional Certificate', issuer:'IBM / Coursera', icon:'fa-solid fa-certificate', body:'Enterprise cybersecurity and automation professional certificate.<br><br><b>Status:</b> Verified · <b>Issuer:</b> IBM' },
+  { name:'PortSwigger Apprentice Labs', issuer:'PortSwigger Academy', icon:'fa-solid fa-spider', body:'Completed Apprentice labs covering SQL injection, XSS, and access control.<br><br><b>Status:</b> Completed · <b>Issuer:</b> PortSwigger Academy' },
+  { name:'AWS Cloud Practitioner Training', issuer:'AWS Skill Builder', icon:'fa-brands fa-aws', body:'Completed digital training for AWS Cloud Practitioner fundamentals.<br><br><b>Status:</b> Digital Training Completed · <b>Issuer:</b> AWS Skill Builder' },
+  { name:'OverTheWire Bandit Level 20+', issuer:'OverTheWire', icon:'fa-solid fa-terminal', body:'Linux command-line, permissions, and networking wargame — reached Level 20+.<br><br><b>Status:</b> Completed · <b>Issuer:</b> OverTheWire' },
+  { name:'Python for Security', issuer:'Self-directed', icon:'fa-brands fa-python', body:'Proficient in Python socket, requests, os, and subprocess modules for security automation.<br><br><b>Status:</b> Proficient · <b>Issuer:</b> Self-directed' }
+];
+
+const DOCS = [
+  { name:'Curriculum Vitae (CV)', meta:'Nazmul_Hossain_Complete_Professional_CV.docx', icon:'PDF', body:'<b>File:</b> Nazmul_Hossain_Complete_Professional_CV.docx<br><b>Pages:</b> 1<br><b>Updated:</b> 2024<br><br>Professional CV covering profile, technical skills, experience, education, and research interests.<br><br><a href="#" onclick="event.preventDefault();showToast(\'Download simulated.\')" class="btn">Download</a>' },
+  { name:'HSC Certificate', meta:'Armed Police Battalion Public School and College, Bogura', icon:'IMG', body:'<b>Institution:</b> Armed Police Battalion Public School and College, Bogura<br><b>Year:</b> 2018 – 2020<br><b>Group:</b> Science<br><br><a href="#" onclick="event.preventDefault();showToast(\'Preview simulated.\')" class="btn">Preview</a>' },
+  { name:'Student ID', meta:'Daffodil International University (DIU)', icon:'ID', body:'<b>Institution:</b> Daffodil International University<br><b>Program:</b> B.Sc. CSE<br><b>Status:</b> Active (2021 – Present)<br><br><a href="#" onclick="event.preventDefault();showToast(\'Preview simulated.\')" class="btn">Preview</a>' }
+];
+
+const EARN_WEEKS = [
+  {
+    title:'Week 1 — The Network Detective',
+    meta:'Focus: Python + Networking · Target: $50',
+    days:[
+      {label:'Day 1-2', kv:'<b>Learn:</b> TCP/IP handshake, ports, sockets (Professor Messer Network+, Python socket docs).<br><b>Build:</b> <code>port_scanner.py</code> — scan IP ports 1-1000, output open ports.'},
+      {label:'Day 3-4', kv:'<b>Sell:</b> Fiverr gig "I will write a Python port scanner". Send 5 cold emails to IT managers.<br><b>Document:</b> Push to GitHub with README. Blog post "How I Built a Python Port Scanner in 30 Minutes."'},
+      {label:'Day 5-7', kv:'<b>Learn:</b> Service version detection.<br><b>Build:</b> <code>service_identifier.py</code> — identify SSH/HTTP/FTP on open ports.<br><b>Sell:</b> Update Fiverr to "Port Scanner + Service ID" ($30). Target: $50.'}
+    ]
+  },
+  {
+    title:'Week 2 — The Web Guardian',
+    meta:'Focus: Python + Web Security · Target: $150',
+    days:[
+      {label:'Day 8-9', kv:'<b>Learn:</b> HTTP headers (CSP, HSTS, X-Frame). OWASP Top 10. PortSwigger Academy.<br><b>Build:</b> <code>header_checker.py</code> — Pass/Fail report for missing security headers.'},
+      {label:'Day 10-11', kv:'<b>Sell:</b> Fiverr gig "Web Security Header Audit". Send 10 emails to e-commerce sites offering a free 3-point audit.<br><b>Document:</b> Push + blog "5 Security Headers Your Website is Missing".'},
+      {label:'Day 12-14', kv:'<b>Learn:</b> SQL injection basics.<br><b>Build:</b> <code>sqli_tester.py</code> — test login forms with <code>\' OR 1=1 --</code>.<br><b>Sell:</b> Update Fiverr "Web Security Audit: Headers + Basic SQLi Check" ($75). Target: $150.'}
+    ]
+  },
+  {
+    title:'Week 3 — The Log Analyst',
+    meta:'Focus: Perl-6 + Log Analysis · Target: $200',
+    days:[
+      {label:'Day 15-16', kv:'<b>Learn:</b> Regular expressions, log parsing. Raku docs, "Automate the Boring Stuff".<br><b>Build:</b> <code>log_analyzer.raku</code> — parse Apache/Nginx logs, output CSV of IPs with >5 failed attempts.'},
+      {label:'Day 17-18', kv:'<b>Sell:</b> Fiverr gig "Analyze your server logs using Perl-6". Email 5 web hosts offering free sample of last 24h logs.<br><b>Document:</b> Push + blog "Why I Use Perl-6 for Log Parsing (And It\'s 30% Faster)".'},
+      {label:'Day 19-21', kv:'<b>Learn:</b> Docker containerization.<br><b>Build:</b> Dockerfile for log_analyzer.raku — one-command deployment.<br><b>Sell:</b> Update Fiverr "Dockerized Log Analyzer" ($100). Target: $200.'}
+    ]
+  },
+  {
+    title:'Week 4 — The Automation Engineer',
+    meta:'Focus: DevSecOps + Bug Bounties · Target: $200',
+    days:[
+      {label:'Day 22-23', kv:'<b>Learn:</b> CI/CD, GitHub Actions.<br><b>Build:</b> <code>.github/workflows/security-audit.yml</code> — runs header_checker.py on every PR, posts a report.'},
+      {label:'Day 24-25', kv:'<b>Sell:</b> Fiverr gig "GitHub Action for automated security audits". Email 5 dev teams offering free repo setup.<br><b>Document:</b> Push + blog "Automating Security Checks in Your GitHub Repo".'},
+      {label:'Day 26-28', kv:'<b>Learn:</b> HackerOne platform.<br><b>Hunt:</b> Pick 1 target (e.g. fintech). Use your port_scanner.py + header_checker.py. Report 1 bug.<br><b>Earn:</b> Target $100 (1 small bounty).'},
+      {label:'Day 29-30', kv:'<b>Consolidate:</b> <code>nazmul-security-toolkit</code> master repo — all scripts + single README.<br><b>Sell:</b> Fiverr Premium "Custom Security Automation Toolkit" ($500).<br><b>Document:</b> Blog "My 30-Day Journey to $500 in Security Automation". Target: $100.'}
+    ]
+  }
+];
+
+/* =========================================================
+   ROUTING
+   ========================================================= */
+const ROUTES = {
+  whoami: { title: '01. Identity & Technical Matrix', crumb: 'whoami' },
+  learning: { title: '02. Technical Skills & Learning Paths', crumb: 'learning' },
+  validation: { title: '03. Certifications & Verification', crumb: 'validation' },
+  document: { title: '04. Personal Document Vault', crumb: 'document' },
+  archive: { title: '05. Verified Achievements & Archive', crumb: 'archive' },
+  project: { title: '06. Completed Projects', crumb: 'project' },
+  underdevelopment: { title: '07. Active Work-In-Progress', crumb: 'underdevelopment' },
+  production: { title: '08. Commercial Production & Services', crumb: 'production' },
+  lets_earn: { title: '09. The $500+ / 120-Hour Execution Sprint', crumb: 'lets_earn' },
+  resources: { title: '10. Digital Library', crumb: 'resources' },
+  get_in_touch: { title: '11. Social Links & Contact', crumb: 'get_in_touch' }
+};
+
+function handleRouting() {
+  let hash = window.location.hash.replace('#','') || 'whoami';
+  if (!ROUTES[hash]) hash = 'whoami';
+
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  const target = document.getElementById('view-' + hash);
+  if (target) target.classList.add('active');
+
+  document.querySelectorAll('.nav-link').forEach(l => {
+    l.classList.toggle('active', l.dataset.route === hash);
+  });
+
+  document.getElementById('breadcrumbPath').textContent = ROUTES[hash].crumb;
+  document.getElementById('pageTitle').textContent = ROUTES[hash].title;
+
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.addEventListener('hashchange', handleRouting);
+window.addEventListener('DOMContentLoaded', () => {
+  handleRouting();
+  renderSkills();
+  renderTasks();
+  renderCerts();
+  renderDocs();
+  renderEarnWeeks();
+  bindMenu();
+  bindSearch();
+  bindUpload();
+});
+
+/* =========================================================
+   SIDEBAR / MOBILE
+   ========================================================= */
+function bindMenu() {
+  const menuBtn = document.getElementById('menuBtn');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  menuBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('show');
+  });
+  overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('show');
+  });
+  document.querySelectorAll('.nav-link').forEach(l => {
+    l.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('show');
+    });
+  });
+}
+
+/* =========================================================
+   SKILLS RENDERING
+   ========================================================= */
+function renderSkills() {
+  const grid = document.getElementById('skillsGrid');
+  grid.innerHTML = SKILLS.map(s => `
+    <div class="skill-tile" data-cat="${s.cat}" onclick="openSkill('${s.id}')">
+      <div class="top">
+        <i class="${s.icon}" style="font-size:26px;color:var(--blue-60)"></i>
+        <span class="cat">${s.cat}</span>
+      </div>
+      <div>
+        <h4>${s.name}</h4>
+        <div class="cat">${s.desc}</div>
+      </div>
+      <div>
+        <div class="bar-meta"><span>Progress</span><span>${s.level}%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:${s.level}%"></div></div>
+      </div>
+      <div class="go">Open guide <i class="fa-solid fa-arrow-right"></i></div>
+    </div>
+  `).join('');
+
+  document.querySelectorAll('#skillFilters .chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#skillFilters .chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.skill-tile').forEach(t => {
+        t.style.display = (f === 'all' || t.dataset.cat === f) ? '' : 'none';
+      });
+    });
+  });
+}
+
+function openSkill(id) {
+  const s = SKILLS.find(x => x.id === id);
+  if (!s) return;
+  const roadmap = s.roadmap.map((r, i) => `
+    <div class="step-item">
+      <div class="step-bullet">${String(i+1).padStart(2,'0')}</div>
+      <div>
+        <div class="st-title">${r.t}</div>
+        <div class="st-desc">${r.d}</div>
+      </div>
+    </div>`).join('');
+  const links = s.resources.map(u => `<li><a href="${u}" target="_blank" rel="noopener">${u}</a></li>`).join('');
+  const body = `
+    <div class="modal-section">
+      <h5>Overview</h5>
+      <p class="small muted">${s.overview}</p>
+    </div>
+    <div class="modal-section">
+      <h5>Learning Roadmap</h5>
+      ${roadmap}
+    </div>
+    <div class="modal-section">
+      <h5>Resources</h5>
+      <ul class="small muted">${links}</ul>
+    </div>
+    <div class="modal-section">
+      <h5>Practice Project</h5>
+      <p class="small muted">${s.project}</p>
+    </div>`;
+  openModal(s.cat.toUpperCase(), s.name, body);
+}
+
+/* =========================================================
+   TASK MANAGER
+   ========================================================= */
+const TASK_KEY = 'emon_foundational_tasks_v1';
+let currentTaskFilter = 'all';
+
+function getTasks() {
+  try { return JSON.parse(localStorage.getItem(TASK_KEY)) || {}; } catch(e) { return {}; }
+}
+function saveTasks(obj) {
+  try { localStorage.setItem(TASK_KEY, JSON.stringify(obj)); } catch(e) {}
+}
+
+function renderTasks() {
+  const wrap = document.getElementById('taskList');
+  if (!wrap) return;
+  const state = getTasks();
+  const html = TASKS_BN.map((t, i) => {
+    const done = !!state[i];
+    if (currentTaskFilter === 'pending' && done) return '';
+    if (currentTaskFilter === 'done' && !done) return '';
+    return `
+      <div class="task-item ${done ? 'done' : ''}" id="task-${i}">
+        <input class="task-check" type="checkbox" id="chk-${i}" ${done ? 'checked' : ''} onchange="toggleTask(${i})">
+        <span class="task-num">${String(i+1).padStart(2,'0')}</span>
+        <label class="task-text" for="chk-${i}">${t}</label>
+      </div>`;
+  }).join('');
+  wrap.innerHTML = html || `<div class="note">কোনো টাস্ক নেই এই ফিল্টারে।</div>`;
+  updateTaskProgress();
+}
+
+function toggleTask(i) {
+  const s = getTasks();
+  s[i] = !s[i];
+  saveTasks(s);
+  const el = document.getElementById('task-' + i);
+  if (el) el.classList.toggle('done', s[i]);
+  updateTaskProgress();
+  showToast(s[i] ? '✅ Task marked complete.' : '↺ Task reopened.');
+}
+
+function updateTaskProgress() {
+  const state = getTasks();
+  const done = Object.values(state).filter(Boolean).length;
+  const total = TASKS_BN.length;
+  const pct = Math.round((done / total) * 100);
+  const el = document.getElementById('calProgressFill');
+  if (el) {
+    el.style.width = pct + '%';
+    document.getElementById('calDoneCount').textContent = done;
+    document.getElementById('calPercent').textContent = pct + '%';
+  }
+}
+
+function resetCalendar() {
+  if (!confirm('সব টাস্ক রিসেট করবেন? এটি undo করা যাবে না।')) return;
+  localStorage.removeItem(TASK_KEY);
+  renderTasks();
+  showToast('↺ Calendar reset.');
+}
+
+document.addEventListener('click', e => {
+  const btn = e.target.closest('[data-taskfilter]');
+  if (!btn) return;
+  document.querySelectorAll('[data-taskfilter]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentTaskFilter = btn.dataset.taskfilter;
+  renderTasks();
+});
+
+/* =========================================================
+   CERTS / DOCS / EARN
+   ========================================================= */
+function renderCerts() {
+  const grid = document.getElementById('certGrid');
+  grid.innerHTML = CERTS.map((c, i) => `
+    <div class="cert-card" onclick="openCert(${i})">
+      <div class="cert-badge"><i class="${c.icon}"></i></div>
+      <div>
+        <h4>${c.name}</h4>
+        <div class="issuer">${c.issuer}</div>
+      </div>
+      <div class="meta-line">Click to verify →</div>
+    </div>`).join('');
+}
+function openCert(i) {
+  const c = CERTS[i];
+  openModal('CREDENTIAL', c.name, `<p class="small muted">${c.body}</p>`);
+}
+
+function renderDocs() {
+  const grid = document.getElementById('docGrid');
+  grid.innerHTML = DOCS.map((d, i) => `
+    <div class="doc-card" onclick="openDoc(${i})">
+      <div class="doc-icon">${d.icon}</div>
+      <div>
+        <h4>${d.name}</h4>
+        <div class="meta">${d.meta}</div>
+      </div>
+    </div>`).join('');
+}
+function openDoc(i) {
+  const d = DOCS[i];
+  openModal('DOCUMENT', d.name, `<p class="small muted">${d.body}</p>`);
+}
+
+function renderEarnWeeks() {
+  const wrap = document.getElementById('earnWeeks');
+  if (!wrap) return;
+  wrap.innerHTML = EARN_WEEKS.map(w => `
+    <div class="week-card mb16">
+      <div class="week-head">
+        <h4>${w.title}</h4>
+        <div class="week-meta">${w.meta}</div>
+      </div>
+      <div class="week-body">
+        ${w.days.map(d => `<div class="day-row"><div class="day-label">${d.label}</div><div class="kv">${d.kv}</div></div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+function openModal(kicker, title, bodyHTML) {
+  document.getElementById('modalKicker').textContent = kicker;
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML = bodyHTML;
+  document.getElementById('modalBackdrop').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalBackdrop').classList.remove('show');
+  document.body.style.overflow = '';
+}
+document.getElementById('modalBackdrop').addEventListener('click', e => {
+  if (e.target.id === 'modalBackdrop') closeModal();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+function bindSearch() {
+  const input = document.getElementById('globalSearch');
+  if (!input) return;
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    document.querySelectorAll('.skill-tile').forEach(tile => {
+      tile.classList.toggle('highlight', q.length > 1 && tile.textContent.toLowerCase().includes(q));
+    });
+    if (q.length > 1) {
+      const hasSkills = Array.from(document.querySelectorAll('.skill-tile')).some(t => t.classList.contains('highlight'));
+      if (hasSkills && location.hash !== '#learning') location.hash = 'learning';
+    }
+  });
+}
+
+/* =========================================================
+   DOCUMENT UPLOAD (FileReader preview)
+   ========================================================= */
+function bindUpload() {
+  const input = document.getElementById('docUpload');
+  if (!input) return;
+  const uploadGrid = document.getElementById('uploadGrid');
+  let store = [];
+  try { store = JSON.parse(localStorage.getItem('emon_uploads_v1')) || []; } catch(e) {}
+
+  const render = () => {
+    uploadGrid.innerHTML = store.length ? store.map((f, i) => `
+      <div class="doc-card" onclick="previewUpload(${i})">
+        <div class="doc-icon">${f.type.startsWith('image') ? 'IMG' : (f.type.includes('pdf') ? 'PDF' : 'FILE')}</div>
+        <div>
+          <h4>${f.name}</h4>
+          <div class="meta">${Math.round(f.size/1024)} KB</div>
+        </div>
+      </div>`).join('') : `<div class="note">কোনো ফাইল এখনো আপলোড করা হয়নি।</div>`;
+  };
+  render();
+
+  input.addEventListener('change', async e => {
+    const files = Array.from(e.target.files || []);
+    for (const file of files) {
+      if (file.size > 2 * 1024 * 1024) { showToast('⚠️ File too large (>2MB): ' + file.name, true); continue; }
+      const reader = new FileReader();
+      const p = new Promise(res => {
+        reader.onload = ev => {
+          store.push({ name: file.name, type: file.type || 'application/octet-stream', size: file.size, data: ev.target.result });
+          res();
+        };
+        reader.readAsDataURL(file);
+      });
+      await p;
+    }
+    try { localStorage.setItem('emon_uploads_v1', JSON.stringify(store)); } catch(e) { showToast('⚠️ Storage limit reached. Oldest files kept.', true); }
+    render();
+    showToast('✅ ' + files.length + ' file(s) uploaded.');
+    e.target.value = '';
+  });
+
+  window.previewUpload = function(i) {
+    const f = store[i];
+    if (!f) return;
+    let html = '';
+    if (f.type.startsWith('image')) html = `<img src="${f.data}" style="max-width:100%;border:1px solid var(--border)">`;
+    else if (f.type.includes('pdf')) html = `<embed src="${f.data}" type="application/pdf" style="width:100%;height:500px;border:1px solid var(--border)">`;
+    else if (f.type.startsWith('text') || f.name.endsWith('.txt')) html = `<pre>${escapeHtml(atob(f.data.split(',')[1] || ''))}</pre>`;
+    else html = `<p class="small muted">${f.name} — preview not supported for this file type. ${Math.round(f.size/1024)} KB.</p>`;
+    openModal('UPLOAD', f.name, html + `<div class="mt16"><button class="btn btn-ghost" onclick="deleteUpload(${i})"><i class="fa-solid fa-trash"></i> Delete</button></div>`);
+  };
+  window.deleteUpload = function(i) {
+    store.splice(i, 1);
+    try { localStorage.setItem('emon_uploads_v1', JSON.stringify(store)); } catch(e) {}
+    render(); closeModal(); showToast('🗑️ File deleted.');
+  };
+}
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* =========================================================
+   EMAIL COPY
+   ========================================================= */
+function copyEmail(btn) {
+  const box = btn.closest('.email-box');
+  const text = box.textContent.replace(/^COPY$/, '').trim();
+  navigator.clipboard.writeText(text).then(
+    () => { btn.textContent = 'COPIED'; setTimeout(() => btn.textContent = 'COPY', 1500); showToast('📋 Copied to clipboard.'); },
+    () => showToast('⚠️ Copy failed.', true)
+  );
+}
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+let toastTimer = null;
+function showToast(msg, isErr) {
+  const t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.toggle('err', !!isErr);
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+/* =========================================================
+   CV DOWNLOAD (simulated — swap for real link)
+   ========================================================= */
+function downloadCV() {
+  // In production, replace with a real link to your hosted PDF:
+  // window.open('assets/cv.pdf', '_blank');
+  showToast('📄 CV download ready (link to your hosted PDF).');
+}
+</script>
+</body>
+</html>
