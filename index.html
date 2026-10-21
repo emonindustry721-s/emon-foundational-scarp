@@ -390,6 +390,136 @@ table.tbl td b{color:#fff;font-weight:500}
   body{background:#fff;color:#000}
   .card{background:#fff;border:1px solid #ccc;color:#000}
 }
+
+/* =========================================================
+   PRO-LEVEL ANIMATIONS (Carbon Motion Standards)
+   ========================================================= */
+:root {
+  /* IBM Carbon Professional Easing Curve */
+  --carbon-ease: cubic-bezier(0.2, 0, 0.38, 0.9);
+  --carbon-ease-out: cubic-bezier(0, 0, 0.38, 0.9);
+}
+
+/* 1. Page Transitions (Smooth Slide Up & Fade) */
+.view.active {
+  animation: carbonPageFadeIn 0.45s var(--carbon-ease) forwards;
+}
+
+@keyframes carbonPageFadeIn {
+  0% { opacity: 0; transform: translateY(20px) scale(0.99); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* 2. Scroll Reveal (Elements fade in as you scroll down) */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s var(--carbon-ease), transform 0.6s var(--carbon-ease);
+  will-change: opacity, transform;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 3. Hover Glow & Lift Effects for Cards */
+.carbon-card, .skill-tile, .cert-card, .proj-card {
+  transition: transform 0.3s var(--carbon-ease), 
+              box-shadow 0.3s var(--carbon-ease), 
+              border-color 0.3s var(--carbon-ease);
+}
+.carbon-card:hover, .skill-tile:hover, .cert-card:hover, .proj-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--accent-blue) inset;
+  border-color: var(--accent-blue);
+}
+
+/* 4. Premium Button Interactions */
+.btn-primary, .btn-secondary {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s var(--carbon-ease);
+}
+.btn-primary:hover {
+  box-shadow: 0 0 15px rgba(15, 98, 254, 0.4);
+  transform: translateY(-2px);
+}
+.btn-primary:active, .btn-secondary:active {
+  transform: translateY(1px) scale(0.97);
+}
+
+/* 5. Interactive Task Checkbox Animation */
+.task-check {
+  transition: all 0.2s var(--carbon-ease);
+}
+.task-check:checked {
+  transform: scale(1.15);
+  box-shadow: 0 0 10px rgba(15, 98, 254, 0.5);
+}
+.task-item {
+  transition: all 0.3s var(--carbon-ease);
+}
+.task-item:hover {
+  transform: translateX(5px);
+  border-color: var(--accent-blue);
+}
+
+/* 6. Profile Image Float Effect */
+.avatar-wrap {
+  animation: floatAvatar 6s ease-in-out infinite;
+  transition: border-color 0.3s var(--carbon-ease);
+}
+.avatar-wrap:hover {
+  border-color: #fff;
+  animation-play-state: paused;
+  transform: scale(1.05) rotate(2deg);
+}
+@keyframes floatAvatar {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); box-shadow: 0 10px 20px rgba(15, 98, 254, 0.2); }
+  100% { transform: translateY(0px); }
+}
+
+/* 7. Sidebar Link Underline Animation */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-blue);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s var(--carbon-ease);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* 8. Modal Pop-in Scale */
+.modal {
+  animation: modalPopIn 0.35s var(--carbon-ease) forwards;
+}
+@keyframes modalPopIn {
+  0% { opacity: 0; transform: scale(0.95) translateY(20px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* 9. Loading Pulse for Placeholders */
+@keyframes carbonPulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+.avatar-fallback {
+  animation: carbonPulse 2s infinite ease-in-out;
+}
+
 </style>
 </head>
 <body>
